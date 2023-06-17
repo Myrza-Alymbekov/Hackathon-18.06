@@ -35,7 +35,7 @@ class FeedbackListView(DataTablesListView):
 
 class FeedbackCreateView(SuccessMessageMixin, CreateView):
     model = Feedback
-    template_name = 'feedback/feedback_create.html'
+    template_name = 'standart_form.html'
     form_class = FeedbackForm
     success_message = 'Заявка успешно создана'
     success_url = ''
