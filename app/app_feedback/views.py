@@ -20,17 +20,17 @@ class FeedbackListView(DataTablesListView):
     fields = '__all__'
     filtered_fields = ['organization', 'product']
 
-    def get_queryset(self):
-        queryset = Feedback.objects.none()  # Создаем пустой quesyet
-        if self.request.user.is_authenticated:  # Проверяем, авторизован ли пользователь
-            user = self.request.user
-            role = user.role
-            if role == 'client':
-                queryset = Feedback.objects.filter(client=user).exclude(status='done')
-            else:
-                queryset = Feedback.objects.all().exclude(status='done')
-
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Feedback.objects.none()  # Создаем пустой quesyet
+    #     if self.request.user.is_authenticated:  # Проверяем, авторизован ли пользователь
+    #         user = self.request.user
+    #         role = user.role
+    #         if role == 'client':
+    #             queryset = Feedback.objects.filter(client=user).exclude(status='done')
+    #         else:
+    #             queryset = Feedback.objects.all().exclude(status='done')
+    #
+    #     return queryset
 
 
 class FeedbackCreateView(SuccessMessageMixin, CreateView):
