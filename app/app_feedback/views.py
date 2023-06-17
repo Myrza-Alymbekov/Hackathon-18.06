@@ -154,6 +154,21 @@ def change_feedback_status(request, pk):
 def index(request):
     return render(request, 'index.html')
 
+def contact(request):
+    return render(request, 'other/contact.html')
+
+def blog(request):
+    return render(request, 'blog/blog-sidebar.html')
+
+def event(request):
+    return render(request, 'event/event.html')
+
+def donation(request):
+    return render(request, 'donation/donation-2.html')
+
+def about(request):
+    return render(request, 'blog/about-us.html')
+
 
 def faq_listview(request):
     faq_list = QuestionAnswer.objects.all()
@@ -162,3 +177,4 @@ def faq_listview(request):
         'faq_list': faq_list,
     }
     return render(request, 'other/faq.html', context)
+
