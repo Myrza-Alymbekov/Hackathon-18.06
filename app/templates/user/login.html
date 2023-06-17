@@ -1,0 +1,61 @@
+{% extends 'user/account_base.html' %}
+{% load static %}
+{% block content %}
+<div class="login-box">
+  <div class="login-logo">
+    <a href="."><b>Авторизация</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Введите свои логин и пароль</p>
+
+      <form action="." method="post">
+        {% csrf_token %}
+        <div class="invalid-feedback" style="display: block;">
+            {{ form.non_field_errors }}
+        </div>
+        <div class="input-group mb-3">
+          {{ form.username }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+          <div class="invalid-feedback" style="display: block;">
+            {{ form.username.errors }}
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          {{ form.password }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+          <div class="invalid-feedback" style="display: block;">
+            {{ form.password.errors }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <p class="mb-1">
+              <a href="/users/password-reset">Забыли пароль?</a>
+            </p>
+          </div>
+          <!-- /.col -->
+          <div class="col-6">
+            <button type="submit" class="btn btn-primary btn-block">Авторизоваться</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+{% endblock %}
+
+

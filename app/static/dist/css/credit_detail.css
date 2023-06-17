@@ -1,0 +1,16 @@
+#tranches .dropdown-menu li {
+    position: relative;
+}
+#tranches .dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+#tranches .dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+}
+#tranches .dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+}

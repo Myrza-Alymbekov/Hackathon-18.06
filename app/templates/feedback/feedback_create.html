@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% load verbose_name %}
+{% block css %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{% static 'dist/css/bootstrap-select.min.css' %}">
+{% endblock css %}
+{% block select %}
+  {{ form.media.css }}
+  <style>
+      input, select {width: 100%}
+  </style>
+{% endblock select %}
+{% block content %}
+  <!-- general form elements -->
+<div class="row">
+  <div class="col-xl-6 col-lg-8 col-md-8 container">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">{{ title }}</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="card-body">
+            {% for field in form %}
+              <div class="form-group">
+                {% if field|field_type == 'ClearableFileInput' %}
+                  {{ field.label_tag }}
+                    <div class="custom-file">
+                      {{ field }}
+                      <label class="custom-file-label" for="{{ field.id_for_label }}">{{ field.value|default:"Choose file" }}</label>
+                    </div>
+                  {% elif field|field_type == 'SelectMultiple' %}
+                  {{ field.label_tag }}
+                  <div class="input-group mb-3">
+                    
+                    {{ field }}
+                    <div class="invalid-feedback" style="display: block;">
+                      {{ field.errors }}
+                    </div>
+                  </div>
+                  {% else %}
+                  {{ field.label_tag }}
+                  {{ field }}
+                {% endif %}
+                {% if field.help_text %}
+                  <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+                {% if field.errors %}
+                  <p class="error">{{ field.errors }}</p>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+  <!-- /.card -->
+
+{% endblock %}
+{% block script %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="{% static 'dist/js/bootstrap-select.min.js' %}"></script>
+<script>
+{% if form.errors %}
+  {% for field, error in form.errors.items %}
+    $(document).Toasts('create', {
+      title: '{{ field }}',
+      body: '{{ error }}',
+      class: 'bg-danger'
+    });
+  {% endfor %}
+{% endif %}
+</script>
+{{ form.media.js }}
+{% endblock script %}

@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+{% load static %}
+{% load verbose_name %}
+{% block content %}
+{% load render_table from django_tables2 %}
+
+<!--modal for changing status-->
+   <div class="modal fade" id="changeFeedbackStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Изменить статус заявки</h5>
+
+
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{% url 'change_status' feedback.id %}">
+                {% csrf_token %}
+                {{ feedback_change_form }}
+                <div class="input-group-append mt-3">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+<!--modal for changing developer-->
+   <div class="modal fade" id="changeFeedbackEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Назначить ответственного и сроки</h5>
+
+
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{% url 'set_employee' feedback.id %}">
+                {% csrf_token %}
+                {{ employee_set_form }}
+                <div class="input-group-append mt-3">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<link rel="stylesheet" href="{% static 'dist/css/application.css' %}">
+<!-- Main content -->
+<section class="content">
+   <div class="container-fluid">
+   <div class="row">
+   <div class="col-md-3">
+      <!-- Profile Image -->
+      <div class="card card-secondary card-outline">
+         <div class="card-body box-profile">
+            <h3 class="profile-username text-center">{{ feedback.client.phone }}</h3>
+            <p class="text-muted text-center">Номер заявки №{{ feedback.number_request }}</p>
+            <ul class="list-group list-group-unbordered mb-3">
+               <li class="list-group-item">
+                  <b>Компания</b> <a class="float-right">{{ feedback.organization }}</a>
+               </li>
+               <li class="list-group-item">
+                  <b>Клиент</b> <a class="float-right">{{ feedback.client }}</a>
+               </li>
+               <li class="list-group-item">
+                  <b>Продукт</b> <a class="float-right">{{ feedback.product }}</a>
+               </li>
+                <li class="list-group-item">
+                  <b>Ошибка</b> <a class="float-right">{{ feedback.error }}</a>
+               </li>
+               <li class="list-group-item">
+                  <b>Статус заявки</b> <a class="float-right">{{ feedback.status }}</a>
+               </li>
+                <div class="btn-group" style="float: right">
+                    {% if request.user.role != 'client' %}
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Действия
+        </button>
+
+        <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" data-toggle="modal" data-target="#changeFeedbackStatus" style="cursor:pointer"><b>Изменить статус заявки</b></a>
+                {% if request.user.role != 'client' and request.user.role != 'developer' %}
+                <a class="dropdown-item" data-toggle="modal" data-target="#changeFeedbackEmployee" style="cursor:pointer"><b>Назначить отвественного</b></a>
+                {% endif %}
+        </div>
+
+    </div>
+{% endif %}
+    </ul>
+
+
+
+
+
+
+</div>
+<!-- /.card-body -->
+</div>
+<!-- second card -->
+      <div class="card card-secondary card-outline">
+         <div class="card-body box-profile">
+            <h3 class="profile-username text-center">Текст ошибки</h3>
+            <p class="text-muted text-center">{{ feedback.error_description }}</p>
+
+
+    <hr />
+
+
+
+</div>
+<!-- /.card-body -->
+</div>
+
+         </div>
+         <!-- /.card-body -->
+   <div class="col-md-9">
+      <div class="card">
+         <div class="card-header p-2">
+            <ul class="nav nav-pills">
+
+               <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Комментарии, файлы</a></li>
+
+
+            </ul>
+         </div>
+         <!-- /.card-header -->
+          <div class="feedback__container">
+
+
+                          <!-- /.tab-pane -->
+               <div class="tab-pane" id="activity">
+<div class="feedback__comments-tab">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
+            <div class="timeline" style="padding: 1rem">
+                {#comments#}
+                <div>
+                    <i class="fas fa-comments bg-yellow"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header">
+                            <b>Комментарии</b>
+                            <form method="POST"
+                                  action="{% url 'add_comment' feedback.id %}"
+                                  class="form-horizontal">
+                                {% csrf_token %}
+
+
+                                <div class="input-group input-group-sm mb-0">
+                                  <textarea class="form-control form-control-sm" name="text"></textarea>
+                                </div>
+                                <div class="input-group-append mt-3">
+                                    <button type="submit" class="btn btn-secondary">Оставить комментарий</button>
+                                </div>
+
+
+                            </form>
+                        </h3>
+                        <div class="timeline-body">
+                            <ul id="paginated-list" data-current-page="1" aria-live="polite">
+
+                                    {% for comment in feedback_comments %}
+                                    <div class="post clearfix pagination__comments">
+                                        <div class="user-block">
+                                            <span class="username" style="margin-left: 0">
+                                                <a href="#">{{ comment.user.username }}</a>
+                                                <h6>{{ comment.comment }}</h6>
+                                                {% if request.user == comment.user %}
+                                                <a href="{% url 'delete_comment' comment.id %}"
+                                                   class="float-right btn-tool"><i
+                                                        class="fas fa-times"></i></a>
+                                                {% endif %}
+                                            </span>
+                                            <span class="description" style="margin-left: 0">{{ comment.date_created }}</span>
+                                        </div>
+                                        <!-- /.user-block -->
+                                        <p>
+                                            {{ comment.text }}
+                                        </p>
+                                    </div>
+                                    {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="timeline-footer">
+                            <nav class="pagination-container">
+                                <button class="pagination-button"
+                                        id="prev-button"
+                                        title="Previous page"
+                                        aria-label="Previous page">
+                                    &lt;
+                                </button>
+
+                                <div id="pagination-numbers">
+                                </div>
+                                <button class="pagination-button"
+                                        id="next-button"
+                                        title="Next page"
+                                        aria-label="Next page">
+                                    &gt;
+                                </button>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                {#files#}
+                <div class="time-label">
+                </div>
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <div>
+                    <i class="fa"><img
+                            src="{% static 'dist/img/icons/files-icon-yellow.png' %}"
+                            alt="files icon" width="30"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header timeline-header-files" style="justify-content: space-between">
+                            <b>Файлы</b>
+
+                                <button style="margin-top: 5px" type="button" class="btn btn-primary"
+                                        data-toggle="modal"
+                                        data-target="#file_feedback">
+                                        <span>Добавить файлы</span>
+                                </button>
+
+                        </h3>
+                        <div class="timeline-body">
+
+                            <ul class="list-unstyled">
+                                {% for file in feedback_files %}
+                                <li>
+
+                                    <a href="{{ file.files.url }}"
+                                       class="btn-link text-secondary"><i
+                                            class="far fa-fw fa-file"></i> {{ file.get_file_name }}
+                                    </a>
+                                </li>
+                                <div>
+                                    <p>{{ file.description }}</p>
+                                </div>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                    <br>
+                    <div class="text-center mt-5 mb-3">
+                        <div class="modal fade" id="file_feedback">
+
+                            <div class="modal-dialog" style="position: relative; z-index: 100">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                            <h4 class="modal-title">Добавить файлы</h4>
+
+                                        <button type="button" class="close"
+                                                data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" action="{% url 'add_files' feedback.id %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+                                        <div class="modal-body">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Файлы</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="file" multiple >
+                                                            <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="description">Комментарий</label>
+                                                    <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer justify-content-between">
+
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Отменить
+                                            </button>
+
+                                            <button type="submit" class="btn btn-primary">
+                                                Сохранить
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                                <!-- /.modal-content -->
+                            </div>
+
+                            <!-- /.modal-dialog -->
+                        </div>
+
+                        <!-- /.modal -->
+                    </div>
+                </div>
+               <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+         </div>
+
+              </div>
+         <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+   </div>
+
+      </div>
+
+               	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+               <form method="post" action="#" enctype="multipart/form-data">
+                   {%csrf_token%}
+				<div class="modal-header">
+					<h4 class="modal-title">Выдача кредита</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+					<div class="modal-body">
+                        <div class="add_credit_container">
+                       {{ credit_form }}
+                           </div>
+					</div>
+					<div class="modal-footer justify-content-between">
+
+						<button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+						<button type="submit" class="btn btn-primary">Сохранить</button>
+					</div>
+               </form>
+
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+
+
+      <!-- /.card -->
+   </div>
+   <!-- /.col -->
+</section>
+<script type="text/javascript" src="{% static 'dist/js/application.js' %}"></script>
+{# {% include 'includes/report_modal.html' %} #}
+
+<!-- /.content -->
+{% endblock %}
+{% block script %}
+<script src="{% static 'dist/js/reports.js' %}"></script>
+
+{% endblock script %}

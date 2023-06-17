@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+{% endblock css %}
+{% block content %}
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{ table_title }}</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        
+        {{ data }}
+        {{ table|safe }}
+      </div>
+      
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'dist/js/pipeline.js' %}"></script>
+<script>
+  $(document).ready(function () {
+      $('#datatable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "paging": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+          "ajax": {
+            url: '',
+            type: "post",
+            error: () => {
+                console.log("someting went wrong!");
+            },
+            data: {
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            pages: 5,
+        },
+        "deferRender": true,
+        "columns": {{ columns|safe }},
+        "dom":"<'row'<'col-sm-3'l><'col-sm-5 text-center'B><'col-sm-3'f>>" +
+              "<'row'<'col-sm-12'tr>>" +
+              "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "buttons": [
+            "excel",
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+            },
+            "print",
+            "colvis"],
+        "language": {{ language|safe }},
+      });
+  });
+
+</script>
+<script>
+    $('.dataTable').on('click', 'tbody td', function() {
+      console.log($(this).parent().attr('id'));
+    });
+</script>
+
+{% endblock %}
