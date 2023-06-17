@@ -6,6 +6,8 @@ files/
 
 app/entrypoint.sh
 app/entrypoint.prod.sh
+app/.DS_Store
+.DS_Store
 
 .env.dev
 .env.prod
