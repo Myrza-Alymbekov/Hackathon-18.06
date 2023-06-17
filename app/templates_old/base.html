@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block select %}
+  {% endblock select %}
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Key Dev CRM</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Theme style -->
+  {% block css %}
+  {% endblock css %}
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+  <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed text-sm">
+<div class="wrapper">
+{# {% include 'includes/header.html' %} #}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="margin-left: 0;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            {#<h1>{{ current_url }}</h1>#}
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              {% if not request.path == '/feedback/create/' %}
+              <form action="{% url 'feedback_create' %}">
+               <button class="btn"><i class="fa fa-plus"></i> Создать заявку</button>
+              </form>
+              {% endif %}
+              <form action="{% url 'feedback_list' %}">
+               <button class="btn"><i class="fa fa-home"></i> Главная</button>
+              </form>
+              {#<li class="breadcrumb-item active">{{ current_url }}</li>#}
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        {% block content %}
+
+        {% endblock content %}
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer" style="margin-left: 0;">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> {{version}}
+    </div>
+    <strong>Copyright &copy; 2022-2023 <a href="#">KeyDev CRM</a>.</strong>
+  </footer>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- bs-custom-file-input -->
+<script src="{% static 'plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'dist/js/demo.js' %}"></script>
+<!-- Page specific script -->
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
+<script>
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'success' %}
+      $(document).Toasts('create', {
+        title: 'Успешно',
+        body: '{{ message }}',
+        delay: 5000,
+        autohide: true,
+        class: 'bg-success'
+      });
+    {% elif message.tags == 'error' %}
+      $(document).Toasts('create', {
+        title: 'Ошибка',
+        body: '{{ message }}',
+        delay: 5000,
+        autohide: true,
+        class: 'bg-danger'
+      });
+    {% else %}
+      $(document).Toasts('create', {
+        title: 'Уведомление',
+        body: '{{ message }}',
+        delay: 5000,
+        autohide: true,
+        class: 'bg-{% if message.tags == 'warning' %}warning{% else %}info{% endif %}'
+      });
+    {% endif %}
+  {% endfor %}
+
+{% endif %}
+
+</script>
+<script>
+function toggleDatePicker(thisElement) {
+  var value = thisElement.value;
+  if (thisElement.classList.contains('datepicker-input')) {
+    thisElement.value = value.split('.').reverse().join('-')
+    thisElement.type = 'date';
+  } else if (thisElement.classList.contains('datetimepicker-input')) {
+    thisElement.value = value.split('.').reverse().join('-')
+    thisElement.type = 'datetime-local';
+  } else if (thisElement.classList.contains('timepicker-input')) {
+    thisElement.value = value.split('.').reverse().join('-')
+    thisElement.type = 'time';
+  }
+
+}
+</script>
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script></script>
+{% endblock script %}
+</body>
+</html>

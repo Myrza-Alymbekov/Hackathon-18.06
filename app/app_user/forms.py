@@ -15,7 +15,7 @@ class UserForm(FormControlMixin, UserCreationForm):
     class Meta:
         model = User
         fields = (
-            'username', 'first_name', 'last_name', 'email', 'phone', 'role', 'organization'
+            'username', 'first_name', 'email', 'phone',
         )
         field_order = fields
 

@@ -25,6 +25,10 @@ class Feedback(models.Model):
     date_of_issue = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления заявки')
     expiration_date = models.DateTimeField(verbose_name='Дата окончания', null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'Заявка на помощь'
+        verbose_name_plural = 'Заявки на помощь'
+
     def __str__(self):
         return f'{self.client}'
 

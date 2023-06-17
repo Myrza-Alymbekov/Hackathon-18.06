@@ -7,6 +7,7 @@ from django.views.generic import CreateView
 from .forms import LoginUserForm, PasswordEmailForm, PasswordReseForm, PasswordUpdateForm, UserForm
 from .models import User
 
+
 class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = UserForm
     template_name = 'user/register.html'
@@ -15,6 +16,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     sidebar_name = 'Создать пользователя'
     sidebar_icon = 'fas fa-user-plus'
     success_message = 'Вы успешно зарегистрировались'
+
 
 class UserLoginView(LoginView):
     form_class = LoginUserForm
