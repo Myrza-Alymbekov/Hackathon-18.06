@@ -13702,7 +13702,6 @@ p.checkout-coupon input[type=text]:focus {
   font-size: 14px;
   transition: 0.3s;
   color: var(--tp-common-black);
-  text-transform: capitalize;
 }
 .tp-login-input input::-webkit-input-placeholder {
   color: #95999D;
