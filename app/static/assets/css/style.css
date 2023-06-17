@@ -1,6 +1,6 @@
 /*-----------------------------------------------------------------------------------
 
-    Theme Name: Poorex - Nonprofit Charity HTML Template 
+    Theme Name: Poorex - Nonprofit Charity HTML Template
     Author: Theme Pure
     Support: https://help.themepure.net/support/
     Version: 1.0
@@ -25,14 +25,14 @@
 	14. gallery css start
 	15. mission css start
 	16. providing css start
-	17. service css start 
+	17. service css start
 	18. shop css start
 	19. slider css start
 	20. team css start
 	21. testimonial css start
 	22. checkout css start
     23. cart css start
-	24. login css start 
+	24. login css start
 	25. footer css start
 
 **********************************************/
@@ -80,7 +80,7 @@
 }
 
 /*---------------------------------
-	typography css start 
+	typography css start
 ---------------------------------*/
 body {
   font-family: var(--tp-ff-body);
@@ -307,7 +307,7 @@ input[type=color] {
 }
 
 /*---------------------------------
-    common classes css start 
+    common classes css start
 ---------------------------------*/
 .w-img img {
   width: 100%;
@@ -3918,7 +3918,7 @@ input[type=text], input[type=email], input[type=tel], input[type=number], input[
 }
 
 /*----------------------------------------*/
-/*  19. slider css start 
+/*  19. slider css start
 /*----------------------------------------*/
 .tp-slider__shape {
   position: absolute;
@@ -8770,7 +8770,7 @@ input[type=text], input[type=email], input[type=tel], input[type=number], input[
 }
 
 /*----------------------------------------*/
-/*  17. service css start 
+/*  17. service css start
 /*----------------------------------------*/
 .tp-service-3__space {
   padding-top: 155px;
@@ -13576,7 +13576,7 @@ p.checkout-coupon input[type=text]:focus {
 }
 
 /*----------------------------------------*/
-/*  24. login css start 
+/*  24. login css start
 /*----------------------------------------*/
 .tp-login-wrapper {
   padding: 50px 60px 70px;
@@ -13702,7 +13702,6 @@ p.checkout-coupon input[type=text]:focus {
   font-size: 14px;
   transition: 0.3s;
   color: var(--tp-common-black);
-  text-transform: capitalize;
 }
 .tp-login-input input::-webkit-input-placeholder {
   color: #95999D;
