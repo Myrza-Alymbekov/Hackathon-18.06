@@ -44,7 +44,7 @@
                                 <div class="tp-donate-2__thumb">
                                     <img width="200" height="150" src="{{ donate.image.url }}" alt="">
                                     <div class="tp-donate-2__thumb-text">
-                                    <a href="donation-details.html"></i>{{ donate.target }}</a>
+                                    <a href="{% url 'feedback_detail' donate.id %}"></i>{{ donate.target }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                             <div class="col-lg-6">
                                 <div class="tp-donate-2__content">
                                     <div class="tp-donate-2__text">
-                                        <a href="donation-details.html">
+                                        <a href="{% url 'feedback_detail' donate.id %}">
                                             <h5 class="tp-donate-2__title">{{ donate.target_name }}</h5>
 
                                         </a>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     <div class="tp-donate-2__button">
-                                        <a class="tp-grey-btn" href="donation-sidebar.html">Помочь сейчас</a>
+                                        <a class="tp-grey-btn" href="{% url 'feedback_detail' donate.id %}">Подробнее</a>
                                     </div>
                                 </div>
                             </div>
@@ -93,13 +93,13 @@
                         <nav>
                            <ul>
                               <li>
-                                 <a href="donation-details.html">1</a>
+                                 <a href="{% url 'feedback_detail' 1 %}">1</a>
                               </li>
                               <li>
-                                 <a href="donation-details.html">2</a>
+                                 <a href="{% url 'feedback_detail' 2 %}">2</a>
                               </li>
                               <li>
-                                 <a href="donation-details.html">3</a>
+                                 <a href="{% url 'feedback_detail' 3 %}">3</a>
                               </li>
                               <li>
                                  <a href="donation-details.html">
