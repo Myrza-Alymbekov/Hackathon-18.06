@@ -3,20 +3,20 @@ from django.urls import reverse
 from app_user.models import User
 
 
+CHOICES_STATUS = (
+    ('done', 'Завершено'),
+    ('pending', 'В процессе'),
+    ('new', 'На рассмотрении'),
+    ('declined', 'Отклонено')
+)
+
+CHOICES_TARGET = (
+    ('charity', 'Благотворительность'),
+    ('social_project', 'Социальный проект')
+)
+
+
 class Feedback(models.Model):
-
-    CHOICES_STATUS = (
-        ('done', 'Завершено'),
-        ('pending', 'В процессе'),
-        ('new', 'На рассмотрении'),
-        ('declined', 'Отклонено')
-    )
-
-    CHOICES_TARGET = (
-        ('charity', 'Благотворительность'),
-        ('social_project', 'Социальный проект')
-    )
-
     client = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Клиент', related_name='client')
     target = models.CharField(max_length=100, choices=CHOICES_TARGET, default='new', verbose_name='Тема')
     target_description = models.TextField(verbose_name='Описание')
@@ -57,7 +57,6 @@ class FeedbackFiles(models.Model):
         return file_list[-1]
 
 
-
 class FeedbackComments(models.Model):
     feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE, verbose_name='Заявка')
     text = models.TextField(verbose_name='Комментарий')
@@ -66,3 +65,56 @@ class FeedbackComments(models.Model):
 
     def __str__(self):
         return f'{self.feedback} - {self.text}'
+
+
+class Application(models.Model):
+    client = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Клиент', related_name='client')
+    target = models.CharField(max_length=100, choices=CHOICES_TARGET, default='new', verbose_name='Тема')
+    target_description = models.TextField(verbose_name='Описание')
+    status = models.CharField(max_length=100, choices=CHOICES_STATUS, default='new',
+                              verbose_name='Статус заявки')
+    date_of_issue = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления заявки')
+    expiration_date = models.DateTimeField(verbose_name='Дата окончания', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Заявка на спонсорство'
+        verbose_name_plural = 'Заявки на спонсорство'
+
+    def __str__(self):
+        return f'{self.client} - {self.target}'
+
+    def get_absolute_url(self):
+        return reverse('feedback_detail', kwargs={'pk': self.pk})
+
+    def get_button(self):
+        return f"""
+                <a href="{self.get_absolute_url()}">
+                  <i class="nav-icon fas fa-edit"></i>
+                </a>
+            """
+
+
+class Requisite(models.Model):
+    feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE, verbose_name='Реквизит')
+    account_number = models.CharField(max_length=16, verbose_name='Номер счета')
+
+    class Meta:
+        verbose_name = 'Реквизит'
+        verbose_name_plural = 'Реквизиты'
+
+    def __str__(self):
+        return f'{self.feedback.target} - {self.account_number}'
+
+
+class Donation(models.Model):
+    requisite = models.ForeignKey(Requisite, on_delete=models.CASCADE, verbose_name='Донат')
+    sum_of_donation = models.FloatField(verbose_name='Сумма доната')
+    client = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Клиент', related_name='client')
+
+    class Meta:
+        verbose_name = 'Донат'
+        verbose_name_plural = 'Донаты'
+
+    def __str__(self):
+        return f'{self.requisite.feedback.target} - {self.sum_of_donation} - {self.client.}'
+
