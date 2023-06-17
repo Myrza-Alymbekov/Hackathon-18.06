@@ -6,9 +6,17 @@ from . import views
 
 urlpatterns = [
     path('index/', views.index, name='index'),
-    path('', views.FeedbackListView.as_view(), name='feedback_list'),
-    path('create/', views.FeedbackCreateView.as_view(), name='feedback_create'),
-    path('<int:pk>/', views.FeedbackDetailView.as_view(), name='feedback_detail'),
+    path('contact/', views.contact, name='contact'),
+    path('events/', views.FeedbackListView.as_view(), name='feedback_list'),
+    path('events/create/', views.FeedbackCreateView.as_view(), name='feedback_create'),
+    path('volunteer/create', views.VolunteerCreateView.as_view(), name="application_create"),
+    path('volunteer/', views.VolunteerListView.as_view(), name="application_list"),
+    path('events/<int:pk>/', views.FeedbackDetailView.as_view(), name='feedback_detail'),
+    path('blog/', views.blog, name='blog'),
+    path('about/', views.about, name='about'),
+    path('donation/', views.donation, name='donation'),
+
+
     path('update/<int:pk>/', views.FeedbackUpdateView.as_view(), name='feedback_update'),
 
     path('<int:pk>/add_files/', views.add_file_to_feedback, name='add_files'),
