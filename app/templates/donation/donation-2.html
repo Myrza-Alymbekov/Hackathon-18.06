@@ -18,11 +18,11 @@
                 <div class="col-12">
                     <div class="tp-breadcrumb__content z-index-5">
                         <div class="tp-breadcrumb__list">
-                           <span><a href="index-2.html">home</a></span>
+                           <span><a href="index-2.html">Главная</a></span>
                            <span class="dvdr"><i class="fa-sharp fa-solid fa-slash-forward"></i></span>
-                           <span>Donations</span>
+                           <span>Заявки</span>
                         </div>
-                        <h3 class="tp-breadcrumb__title">Donations</h3>
+                        <h3 class="tp-breadcrumb__title">Заявки</h3>
                      </div>
                 </div>
             </div>
@@ -50,7 +50,9 @@
                                 <div class="tp-donate-2__content">
                                     <div class="tp-donate-2__text">
                                         <a href="donation-details.html">
-                                            <h5 class="tp-donate-2__title">Care charity names its new chief</h5>
+                                            {% for i in object_list %}
+                                            <h5 class="tp-donate-2__title">{{ i.target_description }}</h5>
+                                            {% endfor %}
                                         </a>
                                         <p>Under his leadership, we believe <br> strengthen our position</p>
                                     </div>

@@ -14,22 +14,10 @@ from .tasks import send_message
 
 
 class FeedbackListView(ListView):
+    template_name = 'donation/donation-2.html'
     model = Feedback
-    serializer_class = FeedbackSerializer
     fields = '__all__'
     filtered_fields = []
-
-    # def get_queryset(self):
-    #     queryset = Feedback.objects.none()  # Создаем пустой quesyet
-    #     if self.request.user.is_authenticated:  # Проверяем, авторизован ли пользователь
-    #         user = self.request.user
-    #         role = user.role
-    #         if role == 'client':
-    #             queryset = Feedback.objects.filter(client=user).exclude(status='done')
-    #         else:
-    #             queryset = Feedback.objects.all().exclude(status='done')
-    #
-    #     return queryset
 
 
 class FeedbackCreateView(SuccessMessageMixin, CreateView):
