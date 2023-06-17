@@ -14128,3 +14128,12 @@ p.checkout-coupon input[type=text]:focus {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.donation-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* Ограничение текста до трех строк */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Добавление многоточия для обрезанного текста */
+}

@@ -16,6 +16,7 @@ from .tasks import send_message
 class FeedbackListView(ListView):
     template_name = 'donation/donation-2.html'
     model = Feedback
+    paginate_by = 4
     fields = '__all__'
     filtered_fields = []
 
