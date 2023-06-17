@@ -21,14 +21,13 @@ class FeedbackCommentsForm(forms.ModelForm):
 class FeedbackForm(FormControlMixin, forms.ModelForm):
     class Meta:
         model = Feedback
-        exclude = ['status', 'client', 'user', 'expiration_date']
+        exclude = ['user', 'date_of_issue', 'status', 'expiration_date', ]
 
 
-
-# class ChangeStatusForm(FormControlMixin, forms.ModelForm):
-#     class Meta:
-#         model = Feedback
-#         fields = ['status', ]
+class ChangeStatusForm(FormControlMixin, forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['status', ]
 #
 #
 # class SetEmployeeForm(FormControlMixin, forms.ModelForm):
@@ -37,4 +36,3 @@ class FeedbackForm(FormControlMixin, forms.ModelForm):
 #     class Meta:
 #         model = Feedback
 #         fields = ['user', 'expiration_date', ]
-

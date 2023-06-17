@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <div class="tp-breadcrumb__area p-relative fix tp-breadcrumb-height" data-background="{% static 'assets/img/breadcrumb/breadcrumb-bg.jpg' %}">
+            <div class="tp-breadcrumb__shape-1 z-index-5">
+                <img src="{% static 'assets/img/breadcrumb/breadcrumb-shape-1.png' %}" alt="">
+            </div>
+            <div class="tp-breadcrumb__shape-2 z-index-5">
+                <img src="{% static 'assets/img/breadcrumb/breadcrumb-shape-2.png' %}" alt="">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tp-breadcrumb__content z-index-5">
+                            <div class="tp-breadcrumb__list">
+                               <span><a href="index-2.html">home</a></span>
+                               <span class="dvdr"><i class="fa-sharp fa-solid fa-slash-forward"></i></span>
+                               <span>Faqs</span>
+                            </div>
+                            <h3 class="tp-breadcrumb__title">Our Faqs</h3>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div>
+        <div class="container">
+        <form accept-charset="UTF-8" enctype="multipart/form-data" action="" method="POST">
+        {% csrf_token %}
+        </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

@@ -1,20 +1,19 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.shortcuts import render
 
-from management.crm_modules.datatables import DataTablesListView
-# from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, SetEmployeeForm
-from .forms import FeedbackForm, FeedbackCommentsForm
-from .models import Feedback, FeedbackFiles, FeedbackComments
+from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
+from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
 from .serializers import FeedbackSerializer
 from .tasks import send_message
 
 
-class FeedbackListView(DataTablesListView):
+class FeedbackListView(ListView):
     model = Feedback
     serializer_class = FeedbackSerializer
     fields = '__all__'
@@ -33,7 +32,7 @@ class FeedbackListView(DataTablesListView):
     #     return queryset
 
 
-class FeedbackCreateView(SuccessMessageMixin, CreateView):
+class FeedbackCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Feedback
     template_name = 'standart_form.html'
     form_class = FeedbackForm
@@ -44,36 +43,21 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['button_name'] = 'Создать'
         context['form'] = FeedbackForm
-        context['comment'] = FeedbackCommentsForm
         return context
 
-    def post(self, request, *args, **kwargs):
-        form_data = request.POST
-        form = FeedbackForm(form_data)
-        if form.is_valid():
-            form.instance.client = request.user
-            recipient_list = [settings.EMAIL_HOST_USER]
-            subject = f'Новое обращение от {form.instance.client}'
-            message = f'Тема: {form.instance.target}'
-            try:
-                send_message.delay(subject, message, recipient_list)
-            except Exception as e:
-                print("Произошла ошибка при отправке сообщения:", str(e))
-            form.save()
-
-        return redirect(reverse('feedback_detail', kwargs={'pk': form.instance.id}))
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class FeedbackDetailView(DetailView):
     model = Feedback
-    template_name = 'feedback/feedback_detail.html'
+    template_name = 'event/evant-details.html'
 
     def get_context_data(self, **kwargs):
         context = super(FeedbackDetailView, self).get_context_data(**kwargs)
         context['feedback_comments'] = FeedbackComments.objects.filter(feedback=self.object)
         context['feedback_files'] = FeedbackFiles.objects.filter(feedback=self.object)
-        context['feedback_change_form'] = ChangeStatusForm
-        context['employee_set_form'] = SetEmployeeForm
         context['button_name'] = 'Сохранить'
         return context
 
@@ -88,7 +72,6 @@ class FeedbackUpdateView(SuccessMessageMixin, UpdateView):
 
 
 def add_file_to_feedback(request, pk):
-
     if request.method == 'POST':
         feedback = Feedback.objects.get(id=pk)
         files = request.FILES.getlist('file')  # Получить список всех загруженных файлов
@@ -107,7 +90,6 @@ def add_file_to_feedback(request, pk):
 
 
 def add_comment_to_feedback(request, pk):
-
     if request.method == 'POST':
         form = FeedbackCommentsForm(request.POST)
         if form.is_valid():
@@ -136,20 +118,6 @@ def delete_comment(request, pk):
         return redirect(reverse('feedback_detail', kwargs={'pk': comment.feedback.id}))
 
 
-def set_employee_feedback(request, pk):
-    if request.method == 'POST':
-        form = SetEmployeeForm(request.POST)
-        if form.is_valid():
-            user = form.cleaned_data['user']
-            expiration_date = form.cleaned_data['expiration_date']
-            feedback = Feedback.objects.get(id=pk)
-            feedback.user = user
-            feedback.expiration_date = expiration_date
-            feedback.save()
-            messages.success(request, 'Ответственный разрабочик и сроки добавлены')
-            return redirect(reverse('feedback_detail', kwargs={'pk': pk}))
-
-
 def change_feedback_status(request, pk):
     if request.method == 'POST':
         form = ChangeStatusForm(request.POST)
@@ -173,3 +141,12 @@ def change_feedback_status(request, pk):
 
 def index(request):
     return render(request, 'index.html')
+
+
+def faq_listview(request):
+    faq_list = QuestionAnswer.objects.all()
+
+    context = {
+        'faq_list': faq_list,
+    }
+    return render(request, 'other/faq.html', context)
