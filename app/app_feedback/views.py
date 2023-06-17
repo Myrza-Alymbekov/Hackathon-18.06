@@ -8,7 +8,7 @@ from django.shortcuts import render
 
 
 from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
-from .models import Feedback, FeedbackFiles, FeedbackComments
+from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
 from .serializers import FeedbackSerializer
 from .tasks import send_message
 
@@ -133,8 +133,6 @@ def delete_comment(request, pk):
         return redirect(reverse('feedback_detail', kwargs={'pk': comment.feedback.id}))
 
 
-
-
 def change_feedback_status(request, pk):
     if request.method == 'POST':
         form = ChangeStatusForm(request.POST)
@@ -158,3 +156,12 @@ def change_feedback_status(request, pk):
 
 def index(request):
     return render(request, 'index.html')
+
+
+def faq_listview(request):
+    faq_list = QuestionAnswer.objects.all()
+
+    context = {
+        'faq_list': faq_list,
+    }
+    return render(request, 'other/faq.html', context)
