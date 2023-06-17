@@ -16,7 +16,7 @@ class FeedbackListView(DataTablesListView):
     model = Feedback
     serializer_class = FeedbackSerializer
     fields = '__all__'
-    filtered_fields = ['organization', 'product']
+    filtered_fields = []
 
     def get_queryset(self):
         queryset = Feedback.objects.none()  # Создаем пустой quesyet
@@ -51,8 +51,8 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
         if form.is_valid():
             form.instance.client = request.user
             recipient_list = [settings.EMAIL_HOST_USER]
-            subject = f'Новое обращение от {form.instance.organization}'
-            message = f'Ошибка: {form.instance.error_description}'
+            subject = f'Новое обращение от {form.instance.client}'
+            message = f'Тема: {form.instance.target}'
             try:
                 send_message.delay(subject, message, recipient_list)
             except Exception as e:
