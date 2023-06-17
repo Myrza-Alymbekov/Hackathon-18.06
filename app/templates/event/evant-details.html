@@ -43,12 +43,11 @@
                                     <span>08 April</span>
                                 </div>
                             </div>
-                            <h4 class="tp-event-details__title">Your Help Make Someone’s life Easier </h4>
+                            <h4 class="tp-event-details__title">{{feedback.target_name}} </h4>
                             <div class="tp-event-details__text pb-25">                   
-                                <p>Curabitur luctus euismod metus, eu pellentesque mauris tempus sit amet. Proin ante odio, posuere id lacus auctor, elementum tempor tellus. Integer mattis justo eu enim tempus lacinia. Fusce vitae enim diam. Ut commodo viverra magna non egestas. Integer sodales massa at odio tristique volutpat. Proin posuere odio maximus, eleifend felis sed, ultrices turpis. Proin ultricies sodales nisl vel euismod. Praesent vestibulum sem lorem, eget fermentum justo iaculis et. Integer tellus dolor, venenatis vitae tortor et, accumsan laoreet sem. Sed laoreet rutrum ex, et efficitur enim pharetra non. Mauris rhoncus, odio eu vulputate interdum, ipsum erat sagittis purus, vitae lobortis eros purus non augue. Nullam molestie augue diam, scelerisque porta dolor mollis a. Cras condimentum elementum eros at finibus. pharetra condimentum sagittis. Donec consequat velit et nisi scelerisque, quis iaculis felis tincidunt. In faucibus sapien ut elit hendrerit, et tristique mauris lacinia. Phasellus tincidunt scelerisque lectus sed scelerisque. Donec at enim facilisis, tempus nisi quis, pharetra enim</p>
-                                <p>Curabitur luctus nisl in justo maximus egestas. Curabitur sit amet sapien vel nunc molestie pulvinar at vitae quam. Aliquam lobortis nisi vitae congue consectetur. Aliquam et quam non metus ultrices faucibus sit amet non nisi. Duis at urna vel turpis aliquet venenatis et eget ipsum. Praesent felis nibh, dictum eu tincidunt sed, elementum at dolor. Duis ultricies urna a tortor faucibus venenatis. Phasellus consequat eu lacus laoreet posuere. Sed ipsum quam, placerat porta aug</p>
+                                <p>{{feedback.target_description}}</p>
                             </div>
-                            <h4 class="tp-event-details__title mb-45">Why Donate On Poorex?</h4>
+                            <h4 class="tp-event-details__title mb-45">Помогать это круто! </h4>
                             <div class="tp-event-details__item-box d-flex justify-content-between">
                                 <div class="tp-event-details__item d-flex align-items-start">
                                     <div class="tp-event-details__icon">
@@ -103,8 +102,8 @@
                                     <img src="{% static 'assets/img/event/author.png' %}" alt="">
                                 </div>
                                 <div class="tp-event-details__author-text">
-                                    <a href="#"><h5>Kaira Beasley</h5></a>
-                                    <span>Host & Speaker</span>
+                                    <a href="#"><h5>{{feedback.user.first_name}}</h5></a>
+                                    <span>{{feedback.user.phone}}</span>
                                 </div>
                             </div>
                             <div class="tp-event-details__contact-box mb-30">
@@ -112,22 +111,11 @@
                                     <li>
                                         <div class="tp-event-details__contact-item d-flex align-items-start">
                                             <div class="tp-event-details__contact-icon">
-                                                <span><i class="flaticon-time"></i></span>
-                                            </div>
-                                            <div class="tp-event-details__contact-text">
-                                                <span>Event Time:</span>
-                                                <b>10:00 am to 8:00 pm</b>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="tp-event-details__contact-item d-flex align-items-start">
-                                            <div class="tp-event-details__contact-icon">
                                                 <span><i class="flaticon-calendar"></i></span>
                                             </div>
                                             <div class="tp-event-details__contact-text">
-                                                <span>Date:</span>
-                                                <b>12 Feb 2023</b>
+                                                <span>Дата создания:</span>
+                                                <b>{{feedback.date_of_issue}}</b>
                                             </div>
                                         </div>
                                     </li>
@@ -137,8 +125,9 @@
                                                 <span><i class="flaticon-phone"></i></span>
                                             </div>
                                             <div class="tp-event-details__contact-text">
-                                                <span>Phone:</span>
-                                                <a href="tel:+9945698743456"><b>+99 456 (9874) 3456</b></a>
+                                                <span>Контакты:</span>
+                                                <a href="tel:+9945698743456"><b>{{feedback.phone_number}}</b></a>
+                                                <a href="tel:+9945698743456"><b>{{feedback.reserve_phone_number}}</b></a>
                                             </div>
                                         </div>
                                     </li>
@@ -148,8 +137,8 @@
                                                 <span><i class="flaticon-folder"></i></span>
                                             </div>
                                             <div class="tp-event-details__contact-text">
-                                                <span>Catagory::</span>
-                                                <b>Health</b>
+                                                <span>Категория:</span>
+                                                <b>{{feedback.target}}</b>
                                             </div>
                                         </div>
                                     </li>
@@ -159,8 +148,8 @@
                                                 <span><i class="flaticon-location"></i></span>
                                             </div>
                                             <div class="tp-event-details__contact-text">
-                                                <span>Location:</span>
-                                                <a href="#"><b>The Strand, sector USA</b></a>                                                
+                                                <span>Адрес:</span>
+                                                <a href="#"><b>{{feedback.address}}</b></a>
                                             </div>
                                         </div></li>
                                 </ul>

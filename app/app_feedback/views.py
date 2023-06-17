@@ -3,17 +3,17 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.shortcuts import render
 
-from management.crm_modules.datatables import DataTablesListView
+
 from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
 from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
 from .serializers import FeedbackSerializer
 from .tasks import send_message
 
 
-class FeedbackListView(DataTablesListView):
+class FeedbackListView(ListView):
     model = Feedback
     serializer_class = FeedbackSerializer
     fields = '__all__'
@@ -65,7 +65,7 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
 
 class FeedbackDetailView(DetailView):
     model = Feedback
-    template_name = 'feedback/feedback_detail.html'
+    template_name = 'event/evant-details.html'
 
     def get_context_data(self, **kwargs):
         context = super(FeedbackDetailView, self).get_context_data(**kwargs)

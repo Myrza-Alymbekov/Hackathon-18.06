@@ -19,19 +19,25 @@ CHOICES_TARGET = (
 
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    target = models.CharField(max_length=100, choices=CHOICES_TARGET, default='new', verbose_name='Тема')
+    image = models.ImageField(verbose_name="Изображение")
+    target = models.CharField(max_length=100, choices=CHOICES_TARGET, default='new', verbose_name='Тип помощи')
+    target_name = models.CharField(max_length=30, verbose_name="Тема")
     target_description = models.TextField(verbose_name='Описание')
     status = models.CharField(max_length=100, choices=CHOICES_STATUS, default='new',
                               verbose_name='Статус заявки')
     date_of_issue = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления заявки')
     expiration_date = models.DateTimeField(verbose_name='Дата окончания', null=True, blank=True)
+    phone_number = models.CharField(max_length=15, verbose_name="Номер телефона")
+    reserve_phone_number = models.CharField(max_length=15, verbose_name="Дополнительный номер телефона", null=True, blank=True)
+    address = models.CharField(max_length=50, verbose_name="Адрес")
+    cash_need = models.FloatField(verbose_name='Необходимая сумма', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Заявка на помощь'
         verbose_name_plural = 'Заявки на помощь'
 
     def __str__(self):
-        return f'{self.client}'
+        return f'{self.target}'
 
     def get_absolute_url(self):
         return reverse('feedback_detail', kwargs={'pk': self.pk})
