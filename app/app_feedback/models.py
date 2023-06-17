@@ -7,17 +7,18 @@ CHOICES_STATUS = (
     ('done', 'Завершено'),
     ('pending', 'В процессе'),
     ('new', 'На рассмотрении'),
-    ('declined', 'Отклонено')
+    ('declined', 'Отклонено'),
 )
 
 CHOICES_TARGET = (
     ('charity', 'Благотворительность'),
-    ('social_project', 'Социальный проект')
+    ('social_project', 'Социальный проект'),
+    ('volunteering', 'Волонтерство'),
 )
 
 
 class Feedback(models.Model):
-    client = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Клиент', related_name='client')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     target = models.CharField(max_length=100, choices=CHOICES_TARGET, default='new', verbose_name='Тема')
     target_description = models.TextField(verbose_name='Описание')
     status = models.CharField(max_length=100, choices=CHOICES_STATUS, default='new',
@@ -65,14 +66,13 @@ class FeedbackComments(models.Model):
     feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE, verbose_name='Заявка')
     text = models.TextField(verbose_name='Комментарий')
     date_created = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
 
     def __str__(self):
         return f'{self.feedback} - {self.text}'
 
 
 class Application(models.Model):
-    client = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Клиент', related_name='client')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     target = models.CharField(max_length=100, choices=CHOICES_TARGET, default='new', verbose_name='Тема')
     target_description = models.TextField(verbose_name='Описание')
     status = models.CharField(max_length=100, choices=CHOICES_STATUS, default='new',
@@ -98,6 +98,30 @@ class Application(models.Model):
             """
 
 
+class ApplicationFiles(models.Model):
+    application = models.ForeignKey(Application, on_delete=models.CASCADE, verbose_name='Заявка')
+    description = models.TextField(verbose_name='Описание', null=True, blank=True)
+    files = models.FileField(verbose_name='Прикрепленные файлы', null=True, blank=True, upload_to=feedback_file_path)
+
+    def __str__(self):
+        return f'{self.application} - {self.description}'
+
+    def get_file_name(self):
+        file = str(self.files)
+        file_list = file.split('/')
+        return file_list[-1]
+
+
+class ApplicationComments(models.Model):
+    application = models.ForeignKey(Application, on_delete=models.CASCADE, verbose_name='Заявка')
+    text = models.TextField(verbose_name='Комментарий')
+    date_created = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+
+    def __str__(self):
+        return f'{self.application} - {self.text}'
+
+
 class Requisite(models.Model):
     feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE, verbose_name='Реквизит')
     account_number = models.CharField(max_length=16, verbose_name='Номер счета')
@@ -113,12 +137,12 @@ class Requisite(models.Model):
 class Donation(models.Model):
     requisite = models.ForeignKey(Requisite, on_delete=models.CASCADE, verbose_name='Донат')
     sum_of_donation = models.FloatField(verbose_name='Сумма доната')
-    client = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Клиент', related_name='client')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
 
     class Meta:
         verbose_name = 'Донат'
         verbose_name_plural = 'Донаты'
 
     def __str__(self):
-        return f'{self.requisite.feedback.target} - {self.sum_of_donation} - {self.client.}'
+        return f'{self.requisite.account_number} - {self.sum_of_donation} - {self.user.first_name}'
 
