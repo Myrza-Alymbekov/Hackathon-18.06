@@ -4,9 +4,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView
+from django.shortcuts import render
 
 from management.crm_modules.datatables import DataTablesListView
-from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, SetEmployeeForm
+# from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, SetEmployeeForm
+from .forms import FeedbackForm, FeedbackCommentsForm
 from .models import Feedback, FeedbackFiles, FeedbackComments
 from .serializers import FeedbackSerializer
 from .tasks import send_message
@@ -167,3 +169,7 @@ def change_feedback_status(request, pk):
         else:
             messages.error(request, 'Статус не изменен')
             return redirect(reverse('feedback_list'))
+
+
+def index(request):
+    return render(request, 'index.html')
