@@ -3,34 +3,21 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.shortcuts import render
 
-from management.crm_modules.datatables import DataTablesListView
-# from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, SetEmployeeForm
-from .forms import FeedbackForm, FeedbackCommentsForm
-from .models import Feedback, FeedbackFiles, FeedbackComments
+
+from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
+from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
 from .serializers import FeedbackSerializer
 from .tasks import send_message
 
 
-class FeedbackListView(DataTablesListView):
+class FeedbackListView(ListView):
+    template_name = 'donation/donation-2.html'
     model = Feedback
-    serializer_class = FeedbackSerializer
     fields = '__all__'
     filtered_fields = []
-
-    # def get_queryset(self):
-    #     queryset = Feedback.objects.none()  # Создаем пустой quesyet
-    #     if self.request.user.is_authenticated:  # Проверяем, авторизован ли пользователь
-    #         user = self.request.user
-    #         role = user.role
-    #         if role == 'client':
-    #             queryset = Feedback.objects.filter(client=user).exclude(status='done')
-    #         else:
-    #             queryset = Feedback.objects.all().exclude(status='done')
-    #
-    #     return queryset
 
 
 class FeedbackCreateView(SuccessMessageMixin, CreateView):
@@ -66,14 +53,12 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
 
 class FeedbackDetailView(DetailView):
     model = Feedback
-    template_name = 'feedback/feedback_detail.html'
+    template_name = 'event/evant-details.html'
 
     def get_context_data(self, **kwargs):
         context = super(FeedbackDetailView, self).get_context_data(**kwargs)
         context['feedback_comments'] = FeedbackComments.objects.filter(feedback=self.object)
         context['feedback_files'] = FeedbackFiles.objects.filter(feedback=self.object)
-        context['feedback_change_form'] = ChangeStatusForm
-        context['employee_set_form'] = SetEmployeeForm
         context['button_name'] = 'Сохранить'
         return context
 
@@ -136,20 +121,6 @@ def delete_comment(request, pk):
         return redirect(reverse('feedback_detail', kwargs={'pk': comment.feedback.id}))
 
 
-def set_employee_feedback(request, pk):
-    if request.method == 'POST':
-        form = SetEmployeeForm(request.POST)
-        if form.is_valid():
-            user = form.cleaned_data['user']
-            expiration_date = form.cleaned_data['expiration_date']
-            feedback = Feedback.objects.get(id=pk)
-            feedback.user = user
-            feedback.expiration_date = expiration_date
-            feedback.save()
-            messages.success(request, 'Ответственный разрабочик и сроки добавлены')
-            return redirect(reverse('feedback_detail', kwargs={'pk': pk}))
-
-
 def change_feedback_status(request, pk):
     if request.method == 'POST':
         form = ChangeStatusForm(request.POST)
@@ -185,3 +156,16 @@ def event(request):
 
 def donation(request):
     return render(request, 'donation/donation-2.html')
+
+def about(request):
+    return render(request, 'blog/about-us.html')
+
+
+def faq_listview(request):
+    faq_list = QuestionAnswer.objects.all()
+
+    context = {
+        'faq_list': faq_list,
+    }
+    return render(request, 'other/faq.html', context)
+

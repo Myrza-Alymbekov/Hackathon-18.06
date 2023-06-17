@@ -25,10 +25,10 @@ class FeedbackForm(FormControlMixin, forms.ModelForm):
 
 
 
-# class ChangeStatusForm(FormControlMixin, forms.ModelForm):
-#     class Meta:
-#         model = Feedback
-#         fields = ['status', ]
+class ChangeStatusForm(FormControlMixin, forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['status', ]
 #
 #
 # class SetEmployeeForm(FormControlMixin, forms.ModelForm):
