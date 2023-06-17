@@ -20,7 +20,7 @@ services:
       - "5455:5432"
     environment:
       - POSTGRES_USER=my_proj
-      - POSTGRES_PASSWORD=gmhQ1PMyZMGYhw2g5Na2WvqH4
+      - POSTGRES_PASSWORD=my_proj
       - POSTGRES_DB=my_proj_dev
   redis:
     image: redis:6.2.5-alpine3.14
