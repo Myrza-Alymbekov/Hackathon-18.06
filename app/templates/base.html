@@ -32,6 +32,11 @@
     {% block css %} {% endblock css %}
 
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style>
+        .tp-header__logo::after {
+            background: #1e3737;
+        }
+    </style>
 
 </head>
 
@@ -157,7 +162,7 @@
 
     <header class="tp-header-height">
         <div id="header-sticky" class="tp-header__left-wrap p-relative">
-            <div class="tp-header__logo">
+            <div class="tp-header__logo" style="background:#1e3737;">
                 <a href="index-2.html"><img src="{% static 'assets/img/logo/logoo.png' %}" alt="" width="120px" height="120px"></a>
             </div>
             <div class="tp-header__right-wrap tp-header__plr">
@@ -223,7 +228,7 @@
                                         <li class="d-none d-xl-block">
                                             <div class="tp-header__icon-box">
                                                 <button class="search-open-btn"><i class="flaticon-loupe"></i></button>
-                                                <a href="login.html"><i class="flaticon-user"></i></a>
+                                                {% comment %} <a href="login.html"><i class="flaticon-user"></i></a> {% endcomment %}
                                             </div>
                                         </li>
                                         <li>
