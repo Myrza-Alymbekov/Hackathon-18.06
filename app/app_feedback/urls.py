@@ -5,6 +5,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('index/', views.index, name='index'),
     path('', views.FeedbackListView.as_view(), name='feedback_list'),
     path('create/', views.FeedbackCreateView.as_view(), name='feedback_create'),
     path('<int:pk>/', views.FeedbackDetailView.as_view(), name='feedback_detail'),
@@ -16,4 +17,4 @@ urlpatterns = [
     path('<int:pk>/change_status/', views.change_feedback_status, name='change_status'),
     path('<int:pk>/set_employee/', views.set_employee_feedback, name='set_employee'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
