@@ -11,9 +11,9 @@ CHOICES_STATUS = (
 )
 
 CHOICES_TARGET = (
-    ('charity', 'Благотворительность'),
-    ('social_project', 'Социальный проект'),
-    ('volunteering', 'Волонтерство'),
+    ('Благотворительность', 'Благотворительность'),
+    ('Социальный проект', 'Социальный проект'),
+    ('Волонтерство', 'Волонтерство'),
 )
 
 
@@ -91,7 +91,7 @@ class Application(models.Model):
         verbose_name_plural = 'Заявки на спонсорство'
 
     def __str__(self):
-        return f'{self.client} - {self.target}'
+        return f'{self.user} - {self.target}'
 
     def get_absolute_url(self):
         return reverse('feedback_detail', kwargs={'pk': self.pk})
