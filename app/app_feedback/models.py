@@ -25,8 +25,8 @@ class Feedback(models.Model):
     target_description = models.TextField(verbose_name='Описание')
     status = models.CharField(max_length=100, choices=CHOICES_STATUS, default='new',
                               verbose_name='Статус заявки')
-    date_of_issue = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления заявки')
-    expiration_date = models.DateTimeField(verbose_name='Дата окончания', null=True, blank=True)
+    date_of_issue = models.DateField(auto_now_add=True, verbose_name='Дата поступления заявки')
+    expiration_date = models.DateField(verbose_name='Дата окончания', null=True, blank=True)
     phone_number = models.CharField(max_length=15, verbose_name="Номер телефона")
     reserve_phone_number = models.CharField(max_length=15, verbose_name="Дополнительный номер телефона", null=True, blank=True)
     address = models.CharField(max_length=50, verbose_name="Адрес")
