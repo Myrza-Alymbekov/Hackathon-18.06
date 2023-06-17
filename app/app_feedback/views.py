@@ -65,7 +65,7 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
 
 class FeedbackDetailView(DetailView):
     model = Feedback
-    template_name = 'feedback/feedback_detail.html'
+    template_name = 'event/evant-details.html'
 
     def get_context_data(self, **kwargs):
         context = super(FeedbackDetailView, self).get_context_data(**kwargs)
