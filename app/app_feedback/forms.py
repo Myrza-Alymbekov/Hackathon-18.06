@@ -24,15 +24,15 @@ class FeedbackForm(FormControlMixin, forms.ModelForm):
         exclude = ['status', 'client', 'user', 'expiration_date']
 
 
-class ChangeStatusForm(FormControlMixin, forms.ModelForm):
-    class Meta:
-        model = Feedback
-        fields = ['status', ]
-
-
-class SetEmployeeForm(FormControlMixin, forms.ModelForm):
-    user = forms.ModelChoiceField(queryset=User.objects.all().exclude(role='client'))
-
-    class Meta:
-        model = Feedback
-        fields = ['user', 'expiration_date', ]
+# class ChangeStatusForm(FormControlMixin, forms.ModelForm):
+#     class Meta:
+#         model = Feedback
+#         fields = ['status', ]
+#
+#
+# class SetEmployeeForm(FormControlMixin, forms.ModelForm):
+#     user = forms.ModelChoiceField(queryset=User.objects.all().exclude(role='client'))
+#
+#     class Meta:
+#         model = Feedback
+#         fields = ['user', 'expiration_date', ]

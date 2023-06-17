@@ -6,7 +6,8 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 
 from management.crm_modules.datatables import DataTablesListView
-from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, SetEmployeeForm
+# from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, SetEmployeeForm
+from .forms import FeedbackForm, FeedbackCommentsForm
 from .models import Feedback, FeedbackFiles, FeedbackComments
 from .serializers import FeedbackSerializer
 from .tasks import send_message

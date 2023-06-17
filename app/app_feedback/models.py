@@ -4,7 +4,6 @@ from app_user.models import User
 
 
 class Feedback(models.Model):
-
     CHOICES_STATUS = (
         ('done', 'Завершено'),
         ('pending', 'В процессе'),
@@ -55,7 +54,6 @@ class FeedbackFiles(models.Model):
         file = str(self.files)
         file_list = file.split('/')
         return file_list[-1]
-
 
 
 class FeedbackComments(models.Model):
