@@ -53,7 +53,7 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
 
 class FeedbackDetailView(DetailView):
     model = Feedback
-    template_name = 'feedback/feedback_detail.html'
+    template_name = 'event/evant-details.html'
 
     def get_context_data(self, **kwargs):
         context = super(FeedbackDetailView, self).get_context_data(**kwargs)
@@ -119,8 +119,6 @@ def delete_comment(request, pk):
     else:
         messages.error(request, 'Вы можете удалять только свои комментарии')
         return redirect(reverse('feedback_detail', kwargs={'pk': comment.feedback.id}))
-
-
 
 
 def change_feedback_status(request, pk):
