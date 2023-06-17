@@ -19,6 +19,7 @@ CHOICES_TARGET = (
 
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    image = models.ImageField(verbose_name="Изображение")
     target = models.CharField(max_length=100, choices=CHOICES_TARGET, default='new', verbose_name='Тема')
     target_description = models.TextField(verbose_name='Описание')
     status = models.CharField(max_length=100, choices=CHOICES_STATUS, default='new',
