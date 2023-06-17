@@ -9,7 +9,6 @@ from django.shortcuts import render
 
 from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
 from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
-from .serializers import FeedbackSerializer
 from .tasks import send_message
 
 
@@ -19,6 +18,15 @@ class FeedbackListView(ListView):
     paginate_by = 4
     fields = '__all__'
     filtered_fields = []
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for feedback in context['object_list']:
+            summ = 0
+            for requisite in feedback.requisite_set.all():
+                summ += sum([i.sum_of_donation for i in requisite.donation_set.all()])
+            feedback.status = summ
+        return context
 
 
 class FeedbackCreateView(SuccessMessageMixin, CreateView):
