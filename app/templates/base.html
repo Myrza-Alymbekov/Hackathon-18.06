@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Poorex - Nonprofit Charity HTML Template</title>
+    <title>Твори добро</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -76,7 +76,7 @@
                     <div class="search__form">
                     <form action="#">
                         <div class="search__input">
-                            <input class="search-input-field" type="text" placeholder="Type here to search...">
+                            <input class="search-input-field" type="text" placeholder="Введите для поиска...">
                             <span class="search-focus-border"></span>
                             <button type="submit">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +184,7 @@
                                 <div class="tp-header-top__right-box text-end">
                                     <ul>
                                         <li class="location"><i class="fa-solid fa-location-dot"></i><a target="_blank" href="https://www.google.com/maps/place/Kyrgyzstan/@41.1021879,69.4605829,6z/data=!3m1!4b1!4m6!3m5!1s0x3897381dfce927f3:0x281058b74e88c433!8m2!3d41.20438!4d74.766098!16s%2Fm%2F0jt3tjf?hl=en&entry=ttu">Г. Бишкек, Кыргызстан</a></li>
-                                        <li><i class="fa-solid fa-envelope"></i><a href="mailto:needhelp@company.com">heartineverythingp@company.com</a></li>
+                                        <li><i class="fa-solid fa-envelope"></i><a href="mailto:needhelp@company.com">heartineverything@company.com</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -201,16 +201,18 @@
                                 <div class="tp-header__main-menu">
                                 <nav class="tp-main-menu-content">
                                     <ul>
-                                        <li><a href="index-2.html">Главная</a></li>
-                                        <li><a href="donation-details.html">Мои Донаты</a></li>
+
+                                        <li><a href="/index">Главная</a></li>
+                                        <li><a href="/donation">Мои Донаты</a></li>
                                         <li class="has-dropdown"><a href="blog-details.html">О Нас</a>
                                             <ul class="submenu tp-submenu">
                                                 <li><a href="blog.html">Вопросы</a></li>
-                                                <li><a href="blog-sidebar.html">Об Организации</a></li>
+                                                <li><a href="/about">Об Организации</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Контакты</a></li>
+                                        <li><a href="/contact">Контакты</a></li>
                                         <li><a href="contact.html">Заявка </a></li>
+
                                     </ul>
                                 </nav>
                                 </div>
@@ -226,7 +228,8 @@
                                         </li>
                                         <li>
                                             <div class="tp-header__btn d-none d-md-block">
-                                            <a class="tp-btn" href="donation-sidebar.html">Пожертвовать</a>
+                                            <a class="tp-btn" href="donation-sidebar.html">Пожертвовать сейчас</a>
+
                                             </div>
                                         </li>
                                         <li>
@@ -236,8 +239,8 @@
                                         </li>
                                         <li>
                                             <div class="tp-header__tel-box d-flex align-items-center">
-                                                <div class="tp-header__tel-icon">
-                                                    <span><i class="flaticon-phone"></i></span>
+                                                <div class="tp-header__tel-icon" style="position:relative;">
+                                                    <span><i class="flaticon-phone" style="position:absolute; top:12;left:18;"></i></span>
                                                 </div>
                                                 <div class="tp-header__tel-text">
                                                     <span>Звоните в Любое Время</span>
@@ -266,18 +269,16 @@
             <div class="tp-footer__bg" data-background="{% static 'assets/img/footer/ft-bg-1.jpg' %}">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s"
-                        data-wow-delay=".3s">
+                        <div class="col-xl-4 col-lg-4 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
                             <div class="tp-footer__widget footer-col-1">
                                 <div class="tp-footer__logo">
-                                    <a href="index-2.html">
-                                        <img src="{% static 'assets/img/logo/footer-1.png' %}" alt="">
+                                    <a href="/index" style="position:relative;">
+                                        <img src="{% static 'assets/img/logo/logoo.png' %}" alt="" width="50">
+                                        <p style="color:white; font-size:1.2rem; position:absolute;top:6;left:60; white-space: nowrap;">Heart in everything</p>
                                     </a>
                                 </div>
                                 <div class="tp-footer__text">
-                                    <p>Suspendisse posuere egeteldapibus. <br> Aliquam cong egeteldapib Aliquam <br>
-                                        congue
-                                        posuere </p>
+                                    <p>Благотворительность - это то,<br> когда ты помогаешь нуждающемуся не ожидая ничего от него взамен.</p>
                                 </div>
                                 <div class="tp-footer__contact-list">
                                     <div class="tp-footer__contact-item pb-20 d-flex about-items-center">
@@ -285,7 +286,7 @@
                                             <i class="flaticon-mail"></i>
                                         </div>
                                         <div class="tp-footer__text">
-                                             <a href="mailto:poorexcharity@gmail.com">poorexcharity@gmail.com</a>
+                                            <a href="mailto:poorexcharity@gmail.com">poorexcharity@gmail.com</a>
                                         </div>
                                     </div>
                                     <div class="tp-footer__contact-item d-flex about-items-center">
@@ -293,54 +294,51 @@
                                             <i aria-hidden="true" class="flaticon-phone"></i>
                                         </div>
                                         <div class="tp-footer__text">
-                                             <a href="tel:+990988764578">+99 (098) 876 4578</a>
+                                            <a href="tel:+990988764578">+99 (098) 876 4578</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-2 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s"
-                        data-wow-delay=".5s">
+                        <div class="col-xl-2 col-lg-2 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
                             <div class="tp-footer__widget footer-col-2">
-                                <h4 class="tp-footer__widget-title">Navigation</h4>
+                                <h4 class="tp-footer__widget-title">Навигация</h4>
                                 <div class="tp-footer__list">
                                     <ul>
-                                        <li><a href="#">Recent Courses</a></li>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Donation</a></li>
-                                        <li><a href="#">Latest News</a></li>
-                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="#">Недавние курсы</a></li>
+                                        <li><a href="#">О нас</a></li>
+                                        <li><a href="#">Пожертвование</a></li>
+                                        <li><a href="#">Последние новости</a></li>
+                                        <li><a href="#">Свяжитесь с нами</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-2 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s"
-                        data-wow-delay=".7s">
+                        <div class="col-xl-2 col-lg-2 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
                             <div class="tp-footer__widget footer-col-3">
-                                <h4 class="tp-footer__widget-title">Campaigns</h4>
+                                <h4 class="tp-footer__widget-title">Компании</h4>
                                 <div class="tp-footer__list">
                                     <ul>
-                                        <li><a href="#">Child Cancer</a></li>
-                                        <li><a href="#">Differently Abled</a></li>
-                                        <li><a href="#">Clean Water</a></li>
-                                        <li><a href="#">Start Fundraising</a></li>
-                                        <li><a href="#">Give Education</a></li>
+                                        <li><a href="#">Детский рак</a></li>
+                                        <li><a href="#">Люди с ограниченными возможностями</a></li>
+                                        <li><a href="#">Чистая вода</a></li>
+                                        <li><a href="#">Начать сбор средств</a></li>
+                                        <li><a href="#">Образование</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 mb-45  wow tpfadeUp" data-wow-duration=".9s"
-                        data-wow-delay=".9s">
+                        <div class="col-xl-4 col-lg-4 col-md-6 mb-45  wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
                             <div class="tp-footer__widget footer-col-4">
-                                <h4 class="tp-footer__widget-title">Our Newsletter</h4>
+                                <h4 class="tp-footer__widget-title">Наша рассылка</h4>
                                 <div class="tp-footer__text pb-5">
-                                    <p>Subscribe to our newsletter and get update <br>in your inbox for future plan</p>
+                                    <p>Подпишитесь на нашу рассылку и получайте обновления <br> в своем почтовом ящике о будущих планах</p>
                                 </div>
                                 <div class="tp-footer__form">
                                     <form action="#">
-                                        <input type="email" placeholder="Email Address">
+                                        <input type="email" placeholder="Адрес электронной почты">
                                     </form>
-                                    <button class="tp-btn-sm theme-2-bg">Subscribe<i class="far fa-long-arrow-right"></i></button>
+                                    <button class="tp-btn-sm theme-2-bg">Подписаться<i class="far fa-long-arrow-right"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -356,15 +354,15 @@
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="tp-copyright__text text-center text-sm-start">
-                            <span>© Copyright 2023 by Poorex.com</span>
+                            <span>© Авторское право 2023 heartineverything.com</span>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="tp-copyright__social text-center text-sm-end">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" style="position:relative;"><i class="fab fa-facebook-f" style="position:absolute; top:12;left:14;"></i></a>
+                            <a href="#" style="position:relative;"><i class="fab fa-instagram" style="position:absolute; top:12;left:14;"></i></a>
+                            <a href="#" style="position:relative;"><i class="fab fa-twitter" style="position:absolute; top:12;left:14;"></i></a>
+                            <a href="#" style="position:relative;"><i class="fab fa-pinterest-p" style="position:absolute; top:12;left:14;"></i></a>
                         </div>
                     </div>
                 </div>
@@ -373,6 +371,7 @@
         <!-- copyright-area-end -->
 
     </footer>
+
 
 
     <!-- JS here -->

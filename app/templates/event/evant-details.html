@@ -47,28 +47,8 @@
                                 <div class="postbox__comment-avater mr-40">
                                     <img src="assets/img/blog/author-1-1.png" alt="">
                                 </div>
-                                <div class="postbox__comment-name p-relative">
-                                    <div class="postbox__comment-text">
-                                        {% for comment in feedback_comments %}
-                                        <p>{{comment.text}} --- {{comment.date_created}}</p>
-                                        {%endfor%}
-                                    </div>
-                                    <form method="POST"
-                                  action="{% url 'add_comment' feedback.id %}"
-                                  class="form-horizontal">
-                                {% csrf_token %}
 
 
-                                <div class="input-group input-group-sm mb-0">
-                                  <textarea class="form-control form-control-sm" name="text"></textarea>
-                                </div>
-                                <div class="input-group-append mt-3">
-                                    <button type="submit" class="btn btn-secondary">Добавить запись</button>
-                                </div>
-
-
-                            </form>
-                                </div>
                             </div>
                         </div>
 

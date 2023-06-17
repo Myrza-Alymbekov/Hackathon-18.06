@@ -3,7 +3,7 @@ from django import forms
 from app_user.models import User
 from management.crm_modules.mixins import FormControlMixin
 
-from .models import Feedback, FeedbackFiles, FeedbackComments
+from .models import Feedback, FeedbackFiles, FeedbackComments, Volunteer
 
 
 class FeedbackFilesForm(forms.ModelForm):
@@ -22,6 +22,12 @@ class FeedbackForm(FormControlMixin, forms.ModelForm):
     class Meta:
         model = Feedback
         exclude = ['user', 'date_of_issue', 'status', 'expiration_date', ]
+
+class VolunteerForm(FormControlMixin, forms.ModelForm):
+    class Meta:
+        model = Volunteer
+        exclude = ['user']
+
 
 
 class ChangeStatusForm(FormControlMixin, forms.ModelForm):
