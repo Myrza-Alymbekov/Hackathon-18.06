@@ -8,7 +8,7 @@ from django.shortcuts import render
 
 from management.crm_modules.datatables import DataTablesListView
 from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
-from .models import Feedback, FeedbackFiles, FeedbackComments
+from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
 from .serializers import FeedbackSerializer
 from .tasks import send_message
 
@@ -19,17 +19,17 @@ class FeedbackListView(DataTablesListView):
     fields = '__all__'
     filtered_fields = []
 
-    def get_queryset(self):
-        queryset = Feedback.objects.none()  # Создаем пустой quesyet
-        if self.request.user.is_authenticated:  # Проверяем, авторизован ли пользователь
-            user = self.request.user
-            role = user.role
-            if role == 'client':
-                queryset = Feedback.objects.filter(client=user).exclude(status='done')
-            else:
-                queryset = Feedback.objects.all().exclude(status='done')
-
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Feedback.objects.none()  # Создаем пустой quesyet
+    #     if self.request.user.is_authenticated:  # Проверяем, авторизован ли пользователь
+    #         user = self.request.user
+    #         role = user.role
+    #         if role == 'client':
+    #             queryset = Feedback.objects.filter(client=user).exclude(status='done')
+    #         else:
+    #             queryset = Feedback.objects.all().exclude(status='done')
+    #
+    #     return queryset
 
 
 class FeedbackCreateView(SuccessMessageMixin, CreateView):
@@ -133,8 +133,6 @@ def delete_comment(request, pk):
         return redirect(reverse('feedback_detail', kwargs={'pk': comment.feedback.id}))
 
 
-
-
 def change_feedback_status(request, pk):
     if request.method == 'POST':
         form = ChangeStatusForm(request.POST)
@@ -158,3 +156,12 @@ def change_feedback_status(request, pk):
 
 def index(request):
     return render(request, 'index.html')
+
+
+def faq_listview(request):
+    faq_list = QuestionAnswer.objects.all()
+
+    context = {
+        'faq_list': faq_list,
+    }
+    return render(request, 'other/faq.html', context)

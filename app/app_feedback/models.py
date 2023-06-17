@@ -146,3 +146,15 @@ class Donation(models.Model):
     def __str__(self):
         return f'{self.requisite.account_number} - {self.sum_of_donation} - {self.user.first_name}'
 
+
+class QuestionAnswer(models.Model):
+    question = models.CharField(max_length=200, verbose_name='Вопрос')
+    answer = models.CharField(max_length=255, verbose_name='Ответ')
+
+    class Meta:
+        verbose_name = 'Вопрос Ответ'
+        verbose_name_plural = 'Вопросы Ответы'
+
+    def __str__(self):
+        return str(self.question)
+

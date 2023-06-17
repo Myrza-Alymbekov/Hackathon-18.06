@@ -17,4 +17,6 @@ urlpatterns = [
     path('<int:pk>/change_status/', views.change_feedback_status, name='change_status'),
     # path('<int:pk>/set_employee/', views.set_employee_feedback, name='set_employee'),
 
+    path('faq/', views.faq_listview, name='question_answer'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
