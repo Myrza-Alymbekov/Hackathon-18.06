@@ -30,37 +30,60 @@
         <!-- breadcrumb-area-end -->
 
          <!-- login area start -->
-         <section class="tp-login-area pt-120 pb-120 p-relative z-index-1 fix tp-login-full__custom">
-            <div class="container">
-               <div class="row justify-content-center">
-                  <div class="col-xl-7 col-lg-8 tp-login-area__custom">
-                     <form method="POST">
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="tp-login-input-wrapper">
-                    <div class="tp-login-input-box">
-                        {{ field.label_tag }}
-                        <div class="tp-login-input tp-login-input__border">
-                            {{ field }}
+         <section class="tp-login-area pt-120 pb-120 p-relative z-index-1 fix">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8">
+                    <div class="tp-login-wrapper">
+                        <div class="tp-login-top text-center mb-30">
+                            <h3 class="tp-login-title">Login to Poorex.</h3>
                         </div>
-                        <div class="invalid-feedback" style="display: block;">
-                            {{ field.errors }}
+                        <div class="tp-login-option">
+
+
+                            <form method="POST" action=".">
+                                {% csrf_token %}
+                                <div class="tp-login-input-wrapper">
+                                    <div class="tp-login-input-box">
+                                        <div class="tp-login-input">
+                                            {{ form.username }}
+                                        </div>
+                                    </div>
+                                    <div class="tp-login-input-box">
+                                        <div class="tp-login-input">
+                                            {{ form.password }}
+                                        </div>
+                                        <div class="tp-login-input-eye" id="password-show-toggle">
+                                            <span id="open-eye" class="open-eye">
+                                                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <!-- Eye SVG code here -->
+                                                </svg>
+                                            </span>
+                                            <span id="close-eye" class="open-close">
+                                                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <!-- Closed eye SVG code here -->
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
+
+                                    <div class="tp-login-forgot">
+                                        <a href="forgot.html">Forgot Password?</a>
+                                    </div>
+                                </div>
+                                <div class="tp-login-bottom">
+                                    <button type="submit" class="tp-login-btn">Login</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
-                <div class="tp-login-forgot-password text-center mt-20 mb-20">
-                    <a href="#" class="btn btn-primary btn-block" style="color: white">Forgot Password?</a>
-                </div>
-                    <button type="submit" class="btn btn-primary btn-block submit-button" style="float:right; margin-bottom:1rem;">Log In</button>
-                    </form>
-                        </div>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
-         </section>
+        </div>
+    </section>
+
          <!-- login area end -->
 
     </main>

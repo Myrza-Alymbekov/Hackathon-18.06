@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
@@ -7,8 +8,9 @@ from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.shortcuts import render
 
 
-from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
-from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
+from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, VolunteerForm
+from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer, Volunteer
+
 from .tasks import send_message
 
 
@@ -29,9 +31,9 @@ class FeedbackListView(ListView):
         return context
 
 
-class FeedbackCreateView(SuccessMessageMixin, CreateView):
+class FeedbackCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Feedback
-    template_name = 'feedback/feedback_create.html'
+    template_name = 'standart_form.html'
     form_class = FeedbackForm
     success_message = 'Заявка успешно создана'
     success_url = ''
@@ -40,24 +42,11 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['button_name'] = 'Создать'
         context['form'] = FeedbackForm
-        context['comment'] = FeedbackCommentsForm
         return context
 
-    def post(self, request, *args, **kwargs):
-        form_data = request.POST
-        form = FeedbackForm(form_data)
-        if form.is_valid():
-            form.instance.client = request.user
-            recipient_list = [settings.EMAIL_HOST_USER]
-            subject = f'Новое обращение от {form.instance.client}'
-            message = f'Тема: {form.instance.target}'
-            try:
-                send_message.delay(subject, message, recipient_list)
-            except Exception as e:
-                print("Произошла ошибка при отправке сообщения:", str(e))
-            form.save()
-
-        return redirect(reverse('feedback_detail', kwargs={'pk': form.instance.id}))
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class FeedbackDetailView(DetailView):
@@ -82,7 +71,6 @@ class FeedbackUpdateView(SuccessMessageMixin, UpdateView):
 
 
 def add_file_to_feedback(request, pk):
-
     if request.method == 'POST':
         feedback = Feedback.objects.get(id=pk)
         files = request.FILES.getlist('file')  # Получить список всех загруженных файлов
@@ -101,7 +89,6 @@ def add_file_to_feedback(request, pk):
 
 
 def add_comment_to_feedback(request, pk):
-
     if request.method == 'POST':
         form = FeedbackCommentsForm(request.POST)
         if form.is_valid():
@@ -177,4 +164,26 @@ def faq_listview(request):
         'faq_list': faq_list,
     }
     return render(request, 'other/faq.html', context)
+
+class VolunteerCreateView(SuccessMessageMixin, CreateView):
+    model = Volunteer
+    template_name = 'feedback/feedback_create.html'
+    form_class = VolunteerForm
+    success_message = 'Волонтер успешно добавлен'
+    success_url = ''
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['button_name'] = 'Создать'
+        context['form'] = FeedbackForm
+        context['comment'] = FeedbackCommentsForm
+        return context
+
+class VolunteerListView(ListView):
+    template_name = 'volunteer/team.html'
+    model = Volunteer
+    paginate_by = 4
+    fields = '__all__'
+    filtered_fields = []
+
 

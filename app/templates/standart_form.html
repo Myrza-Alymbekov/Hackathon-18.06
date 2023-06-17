@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <style>
+        .tp-contact-form__input-box__custom textarea {
+            height: 3.7rem;
+        }
+        .tp-contact-form__input-box__custom select {
+
+              background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+              background-repeat: no-repeat;
+              background-position-x: 100%;
+              background-position-y: 5px;
+
+
+        }
+    </style>
+        <!-- breadcrumb-area-start -->
+        <div class="tp-breadcrumb__area p-relative fix tp-breadcrumb-height" data-background="{% static 'assets/img/breadcrumb/breadcrumb-bg.jpg' %}">
+            <div class="tp-breadcrumb__shape-1 z-index-5">
+                <img src="{% static 'assets/img/breadcrumb/breadcrumb-shape-1.png' %}" alt="">
+            </div>
+            <div class="tp-breadcrumb__shape-2 z-index-5">
+                <img src="{% static 'assets/img/breadcrumb/breadcrumb-shape-2.png' %}" alt="">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tp-breadcrumb__content z-index-5">
+                            <div class="tp-breadcrumb__list">
+                               <span><a href="index-2.html">home</a></span> 
+                               <span class="dvdr"><i class="fa-sharp fa-solid fa-slash-forward"></i></span>
+                               <span>Contact</span>
+                            </div>
+                            <h3 class="tp-breadcrumb__title">Contact</h3>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb-area-end -->
+
+
+        <!-- form-area-start -->
+        <div class="tp-contact-form__area tp-contact-form__space">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-5 wow tpfadeLeft" data-wow-duration=".9s"
+                    data-wow-delay=".3s">
+                        <div class="tp-contact-form__left-box">
+                            <span class="tp-contact-form__subtitle">Heart in everything</span>
+                            <h4 class="tp-section-title pb-20">Оставить заявку</h4>
+                            <p>Благотворительность – это акт безусловного распространения любви и доброты на других,
+                                <br> но решение принимается сердцем, не ожидания ничего в ответ</p>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-7 wow tpfadeRight" data-wow-duration=".9s"
+                    data-wow-delay=".7s">
+                        <div class="tp-contact-form__form-box">
+                         <form action="{% url 'feedback_create' %}" class="border-right pr-5 mb-5" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {% for f in form %}
+
+                                    <div class="col-xl-6 mb-30">
+                                        <div class="tp-contact-form__input-box tp-contact-form__input-box__custom">
+                                            {{ f.label }}
+                                                {{ f }}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                             <div class="tp-contact-form__button">
+                                <button class="tp-btn">Отправить заявку</button>
+                            </div>
+                         </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- form-area-end -->
+
+        <!-- contact-area-start -->
+        <div class="tp-contact__area">
+            <div class="container">
+                <div class="tp-contact__bg">
+                    <div class="tp-contact__wrapper d-flex align-items-center justify-content-between">
+                        <div class="tp-contact__item d-flex align-items-center">
+                            <div class="tp-contact__icon">
+                              <span><i class="flaticon-phone"></i></span>
+                            </div>
+                            <div class="tp-contact__text">
+                                <a href="+996(556)-36-18-50">+996(556)-36-18-50</a>
+                            </div>
+                        </div>                        
+                        <div class="tp-contact__item d-flex align-items-center">
+                            <div class="tp-contact__icon">
+                              <span><i class="flaticon-email"></i></span>
+                            </div>
+                            <div class="tp-contact__text">
+                                <a href="heartineverythingp@company.com">heartineverythingp@company.com</a>
+
+                            </div>
+                        </div>
+                        <div class="tp-contact__item d-flex align-items-center">
+                            <div class="tp-contact__icon">
+                              <span><i class="flaticon-location"></i></span>
+                            </div>
+                            <div class="tp-contact__text">
+                                <a href="#">Исанова 37 <br> Бишкек, Кыргызстан</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- contact-area-end -->
+
+        <!-- location-area-start -->
+        <div class="tp-location__area">
+            <div class="container-fluid g-0">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="tp-location__info-box">
+                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93561.88851531032!2d74.59186095!3d42.87687505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7dc91b3c881%3A0x492ebaf57cdee27d!2sBishkek!5e0!3m2!1sen!2skg!4v1687021876057!5m2!1sen!2skg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- location-area-end -->
+
+
+    </main>
+
+{% endblock content %}

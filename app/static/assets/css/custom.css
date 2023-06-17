@@ -1,8 +1,9 @@
 .tp-login-area__custom {
-    background: #385656;
+    background: #f2f7f7;
     padding-top: 1rem;
+    border-radius: 1rem
 }
 
 .tp-login-full__custom {
-    background: #385656;
+    background: #fffff;
 }
