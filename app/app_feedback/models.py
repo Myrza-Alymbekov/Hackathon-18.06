@@ -32,7 +32,7 @@ class Feedback(models.Model):
         verbose_name_plural = 'Заявки на помощь'
 
     def __str__(self):
-        return f'{self.client}'
+        return f'{self.target}'
 
     def get_absolute_url(self):
         return reverse('feedback_detail', kwargs={'pk': self.pk})
@@ -86,7 +86,7 @@ class Application(models.Model):
         verbose_name_plural = 'Заявки на спонсорство'
 
     def __str__(self):
-        return f'{self.client} - {self.target}'
+        return f'{self.user} - {self.target}'
 
     def get_absolute_url(self):
         return reverse('feedback_detail', kwargs={'pk': self.pk})
