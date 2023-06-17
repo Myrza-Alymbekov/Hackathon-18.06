@@ -40,34 +40,60 @@
                             </div>
                             <h4 class="tp-event-details__title">{{feedback.target_name}} </h4>
                             <div class="tp-event-details__text pb-25">                   
-                                <p>{{feedback.target_description}}</p>
+                                <p><strong>{{feedback.target_description}}</strong></p>
+                            </div>
+                            <div class="postbox__comment-name p-relative">
+                                    <div class="postbox__comment-text">
+                                        {% for comment in feedback_comments %}
+                                        <div class="tp-event-details__text pb-25">
+                                        <p><strong>{{comment.text}}</strong></p>
+                                            <p><em>{{comment.date_created}}</em></p>
+                                        </div>
+                                        {%endfor%}
+                                    </div>
+                                </div>
+                            <div class="postbox__comment-form-box">
+                            <h3 class="postbox__comment-form-title">Добавить описание</h3>
+                            <div class="postbox__comment-form">
+                                 <form id="contact-form" method="POST" action="{% url 'add_comment' feedback.id %}">
+                                {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-xxl-12">
+                                            <div class="postbox__comment-input">
+                                                <textarea name="text"
+                                                    placeholder="Написать ..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-12">
+                                            <div class="postbox__comment-btn">
+                                                <button type="submit" class="tp-btn">Добавить запись</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                            <div class="tp-donation-details__form-box">
+                                <p></p>
+                                <h4 class="tp-donation-details__form-title pb-45">Добавить реквизиты</h4>
+                                <form method="post" action="{% url 'create_requisite' feedback.id %}">
+                                    {%csrf_token%}
+                                        <div class="col-xl-6 col-lg-6 col-md-6 mb-30">
+                                            <div class="tp-donation-details__input">
+                                                <label>Номер счета</label>
+                                                <input name="account_number" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="tp-donation-details__button">
+                                            <button type="submit" class="tp-btn">Отправить</button>
+                                        </div>
+                                </form>
                             </div>
                             <div class="postbox__comment-box p-relative">
                             <div class="postbox__comment-info d-flex align-items-center">
                                 <div class="postbox__comment-avater mr-40">
                                     <img src="assets/img/blog/author-1-1.png" alt="">
-                                </div>
-                                <div class="postbox__comment-name p-relative">
-                                    <div class="postbox__comment-text">
-                                        {% for comment in feedback_comments %}
-                                        <p>{{comment.text}} --- {{comment.date_created}}</p>
-                                        {%endfor%}
-                                    </div>
-                                    <form method="POST"
-                                  action="{% url 'add_comment' feedback.id %}"
-                                  class="form-horizontal">
-                                {% csrf_token %}
-
-
-                                <div class="input-group input-group-sm mb-0">
-                                  <textarea class="form-control form-control-sm" name="text"></textarea>
-                                </div>
-                                <div class="input-group-append mt-3">
-                                    <button type="submit" class="btn btn-secondary">Добавить запись</button>
-                                </div>
-
-
-                            </form>
                                 </div>
                             </div>
                         </div>
@@ -109,11 +135,38 @@
                                     </div>
                                     <div class="tp-event-details__item-text">
                                         <h5 class="tp-event-details__title-sm">Вместе мы сможем!</h5>
-                                        <span>Curabitur luctus euismod metus, eu <br> pellentesque ma Proin posuere id <br>lacus auctor, elementum</span>
+                                        <span  id="donates" >Curabitur luctus euismod metus, eu <br> pellentesque ma Proin posuere id <br>lacus auctor, elementum</span>
                                     </div>
                                 </div>
                             </div>
+                                <div class="tp-donation-details__form-box">
+                                <h4 class="tp-donation-details__form-title pb-45">Оказать помощь</h4>
+                                <form method="post" action="{% url 'create_donation' feedback.id %}">
+                                    {%csrf_token%}
 
+                                        <div class="col-xl-6 col-lg-6 col-md-6 mb-30">
+                                            <div class=" tp-donation-details__input">
+                                                <label>Реквизит</label>
+                                                <select name="requisite" class="nice-select" style="width:23rem">
+                                                    {% for i in requisites %}
+                                                    <option>{{ i.account_number }}</option>
+                                                    {% endfor %}
+                                                </select>
+
+                                                </div>
+                                            </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 mb-30">
+                                            <div class="tp-donation-details__input">
+                                                <label>Сумма</label>
+                                                <input name="sum_donate" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="tp-donation-details__button">
+                                            <button type="submit" class="tp-btn">Отправить</button>
+                                        </div>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4">
@@ -175,11 +228,26 @@
                                         </div></li>
                                 </ul>
                             </div>
+
+                            <div class="tp-event-details__item-2 text-center" data-background="{% static 'assets/img/event/event-details-1-2.jpg' %}" style="background-image: url(&quot;assets/img/event/event-details-1-2.jpg&quot;);">
+                                <div class="tp-event-details__item-2-logo pb-25">
+                                    <img src="assets/img/event/event-details-logo.png" alt="">
+                                </div>
+                                <div class="tp-event-details__item-2-text">
+                                    <h4 class="tp-event-details__item-2-title">Вместе к цели <br>Сбор продолжается</h4>
+                                    <span>собрано {{ donates }} из {{feedback.cash_need}} сом</span>
+                                </div>
+                                <div class="tp-event-details__button">
+                                    <a class="tp-border-btn" href="#donates">Пожертвовать</a>
+                                </div>
+                            </div>
+                                <p></p>
+
                             <div class="tp-event-details__info-box mb-30">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2920.3804612504823!2d74.56907687694468!3d42.949186207370246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec76a3e67baab%3A0x189fd3cfab82dc06!2z0JrQsNC70YvRgSDQntGA0LTQvg!5e0!3m2!1sru!2skg!4v1687001349460!5m2!1sru!2skg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>

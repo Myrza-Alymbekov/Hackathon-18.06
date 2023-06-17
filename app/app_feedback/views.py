@@ -8,7 +8,7 @@ from django.shortcuts import render
 
 
 from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
-from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer
+from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer, Donation, Requisite
 from .tasks import send_message
 
 
@@ -25,7 +25,8 @@ class FeedbackListView(ListView):
             summ = 0
             for requisite in feedback.requisite_set.all():
                 summ += sum([i.sum_of_donation for i in requisite.donation_set.all()])
-            feedback.status = summ
+            feedback.donates = summ
+            feedback.percents = round(feedback.donates * 100 / feedback.cash_need)
         return context
 
 
@@ -69,6 +70,11 @@ class FeedbackDetailView(DetailView):
         context['feedback_comments'] = FeedbackComments.objects.filter(feedback=self.object)
         context['feedback_files'] = FeedbackFiles.objects.filter(feedback=self.object)
         context['button_name'] = 'Сохранить'
+        context['requisites'] = self.object.requisite_set.all()
+        summ = 0
+        for requisite in context['requisites']:
+            summ += sum([i.sum_of_donation for i in requisite.donation_set.all()])
+        context['donates'] = round(summ)
         return context
 
 
@@ -162,3 +168,24 @@ def faq_listview(request):
         'faq_list': faq_list,
     }
     return render(request, 'other/faq.html', context)
+
+
+def donation_create(request, pk):
+    if request.method == "POST":
+        requisite = Requisite.objects.get(account_number=request.POST.get('requisite'))
+        Donation.objects.create(sum_of_donation=int(request.POST.get('sum_donate')),
+                                requisite=requisite,
+                                user=request.user)
+        return redirect(reverse('feedback_detail', kwargs={'pk': pk}))
+
+
+def create_requisite(request, pk):
+    if request.method == "POST":
+        feedback = Feedback.objects.get(id=pk)
+        Requisite.objects.create(account_number=request.POST.get('account_number'),
+                                 feedback=feedback)
+        return redirect(reverse('feedback_detail', kwargs={'pk': pk}))
+
+
+
+
