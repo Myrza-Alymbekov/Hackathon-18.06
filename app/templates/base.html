@@ -1,149 +1,474 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+
+<html class="no-js" lang="zxx">
+
+
+<!-- Mirrored from weblearnbd.net/tphtml/poorex-prev/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Jun 2023 05:36:01 GMT -->
 <head>
-  {% block select %}
-  {% endblock select %}
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Poorex - Nonprofit Charity HTML Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Key Dev CRM</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
-  <!-- Theme style -->
-  {% block css %}
-  {% endblock css %}
-  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
-  <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/logo/favicon.png' %}">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/custom-animation.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome-pro.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/spacing.css' %}">
+
+    {% block css %} {% endblock css %}
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
 </head>
-<body class="hold-transition sidebar-mini layout-fixed text-sm">
-<div class="wrapper">
-{# {% include 'includes/header.html' %} #}
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-left: 0;">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            {#<h1>{{ current_url }}</h1>#}
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              {% if not request.path == '/feedback/create/' %}
-              <form action="{% url 'feedback_create' %}">
-               <button class="btn"><i class="fa fa-plus"></i> Создать заявку</button>
-              </form>
-              {% endif %}
-              <form action="{% url 'feedback_list' %}">
-               <button class="btn"><i class="fa fa-home"></i> Главная</button>
-              </form>
-              {#<li class="breadcrumb-item active">{{ current_url }}</li>#}
-            </ol>
-          </div>
+<body>
+
+    <!-- preloader -->
+    <div id="preloader">
+        <div class="preloader">
+            <span></span>
+            <span></span>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        {% block content %}
-
-        {% endblock content %}
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer" style="margin-left: 0;">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> {{version}}
     </div>
-    <strong>Copyright &copy; 2022-2023 <a href="#">KeyDev CRM</a>.</strong>
-  </footer>
+    <!-- preloader end  -->
+
+    <!-- back-to-top-start  -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <i class="far fa-angle-double-up"></i>
+    </button>
+    <!-- back-to-top-end  -->
+
+    <!-- search popup start -->
+    <div class="search__popup">
+        <div class="container">
+        <div class="row">
+            <div class="col-xxl-12">
+                <div class="search__wrapper">
+                    <div class="search__top d-flex justify-content-between align-items-center">
+                    <div class="search__logo">
+                        <a href="index-2.html">
+                            <img src="{% static 'assets/img/logo/footer-1.png' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="search__close">
+                        <button type="button" class="search__close-btn search-close-btn">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    </div>
+                    <div class="search__form">
+                    <form action="#">
+                        <div class="search__input">
+                            <input class="search-input-field" type="text" placeholder="Type here to search...">
+                            <span class="search-focus-border"></span>
+                            <button type="submit">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- search popup end -->
+
+    <!-- tp-offcanvus-area-start -->
+     <div class="tpoffcanvas-area">
+    <div class="tpoffcanvas">
+       <div class="tpoffcanvas__close-btn">
+          <button class="close-btn"><i class="fal fa-times"></i></button>
+       </div>
+       <div class="tpoffcanvas__logo">
+          <a href="index-2.html">
+             <img src="{% static 'assets/img/logo/footer-1.png' %}" alt="">
+          </a>
+       </div>
+       <div class="tpoffcanvas__title">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima incidunt eaque a cumque, porro maxime autem sed.</p>
+       </div>
+       <div class="tp-main-menu-mobile d-xl-none"></div>
+       <div class="tpoffcanvas__contact-info">
+          <div class="tpoffcanvas__contact-title">
+             <h5>Contact us</h5>
+          </div>
+          <ul>
+             <li>
+                <i class="fa-light fa-location-dot"></i>
+                <a href="https://www.google.com/maps/@23.8223586,90.3661283,15z" target="_blank">Melbone st, Australia, Ny 12099</a>
+             </li>
+             <li>
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:solaredge@gmail.com">themepure@gmail.com</a>
+             </li>
+             <li>
+                <i class="fal fa-phone-alt"></i>
+                <a href="tel:+48555223224">+48 555 223 224</a>
+             </li>
+          </ul>
+       </div>
+       <div class="tpoffcanvas__input">
+          <div class="tpoffcanvas__input-title">
+             <h4>Get UPdate</h4>
+          </div>
+          <form action="#">
+             <div class="p-relative">
+                <input type="text" placeholder="Enter mail">
+                <button>
+                   <i class="fas fa-paper-plane"></i>
+                </button>
+             </div>
+          </form>
+       </div>
+       <div class="tpoffcanvas__social">
+          <div class="social-icon">
+             <a href="#"><i class="fab fa-twitter"></i></a>
+             <a href="#"><i class="fab fa-instagram"></i></a>
+             <a href="#"><i class="fab fa-facebook-f"></i></a>
+             <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+       </div>
+    </div>
+     </div>
+    <div class="body-overlay"></div>
+    <!-- tp-offcanvus-area-end -->
 
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-<!-- jQuery -->
-<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- bs-custom-file-input -->
-<script src="{% static 'plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static 'dist/js/demo.js' %}"></script>
-<!-- Page specific script -->
-<script>
-$(function () {
-  bsCustomFileInput.init();
-});
-</script>
-<script>
-{% if messages %}
-  {% for message in messages %}
-    {% if message.tags == 'success' %}
-      $(document).Toasts('create', {
-        title: 'Успешно',
-        body: '{{ message }}',
-        delay: 5000,
-        autohide: true,
-        class: 'bg-success'
-      });
-    {% elif message.tags == 'error' %}
-      $(document).Toasts('create', {
-        title: 'Ошибка',
-        body: '{{ message }}',
-        delay: 5000,
-        autohide: true,
-        class: 'bg-danger'
-      });
-    {% else %}
-      $(document).Toasts('create', {
-        title: 'Уведомление',
-        body: '{{ message }}',
-        delay: 5000,
-        autohide: true,
-        class: 'bg-{% if message.tags == 'warning' %}warning{% else %}info{% endif %}'
-      });
-    {% endif %}
-  {% endfor %}
+    <header class="tp-header-height">
+        <div id="header-sticky" class="tp-header__left-wrap p-relative">
+            <div class="tp-header__logo">
+                <a href="index-2.html"><img src="{% static 'assets/img/logo/logo.png' %}" alt=""></a>
+            </div>
+            <div class="tp-header__right-wrap tp-header__plr">
+                <!-- header-top-area-start -->
+                <div class="tp-header-top__area tp-header-top__hide tp-header-top__space theme-bg">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xxl-6 col-xl-5 col-lg-7 col-md-8">
+                                <div class="tp-header-top__left-box">
+                                    <ul>
+                                        <li><span>Connect with our charity</span></li>
+                                        <li>
+                                            <div class="tp-header-top__social">
+                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="#"><i class="fab fa-instagram"></i></a>
+                                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                            <a href="#"><i class="fab fa-twitter"></i></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-7 col-lg-5 col-md-4">
+                                <div class="tp-header-top__right-box text-end">
+                                    <ul>
+                                        <li class="location"><i class="fa-solid fa-location-dot"></i><a target="_blank" href="https://www.google.com/maps/place/মার্কিন+যুক্তরাষ্ট্র/@39.7270203,-104.9556871,14z/data=!4m6!3m5!1s0x54eab584e432360b:0x1c3bb99243deb742!8m2!3d37.09024!4d-95.712891!16zL20vMDljN3cw?entry=ttu">66 Broklyne  Golden Street, USA</a></li>
+                                        <li><i class="fa-solid fa-envelope"></i><a href="mailto:needhelp@company.com">needhelp@company.com</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- header-top-area-end -->
 
-{% endif %}
+                <!-- header-area-start -->
+                <div class="tp-header__area tp-header__space">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-xxl-6 col-xl-8 col-lg-8 d-none d-lg-block">
+                                <div class="tp-header__main-menu">
+                                <nav class="tp-main-menu-content">
+                                    <ul>
+                                        <li class="has-dropdown"><a href="index-2.html">Home</a>
+                                            <div class="tp-submenu submenu has-homemenu">
+                                                <div class="row gx-6 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                                                   <div class="col homemenu">
+                                                      <div class="homemenu-thumb mb-15">
+                                                         <img src="{% static 'assets/img/menu/home-1.jpg' %}" alt="">
+                                                         <div class="homemenu-btn">
+                                                            <a class="tp-menu-btn" href="index-2.html">View Demo</a>
+                                                         </div>
+                                                      </div>
+                                                      <div class="homemenu-content text-center">
+                                                         <h4 class="homemenu-title">
+                                                            <a href="index-2.html">Home 01</a>
+                                                         </h4>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col homemenu">
+                                                      <div class="homemenu-thumb mb-15">
+                                                         <img src="{% static 'assets/img/menu/home-2.jpg' %}" alt="">
+                                                         <div class="homemenu-btn">
+                                                            <a class="tp-menu-btn" href="index-3.html">View Demo</a>
+                                                         </div>
+                                                      </div>
+                                                      <div class="homemenu-content text-center">
+                                                         <h4 class="homemenu-title">
+                                                            <a href="index-3.html">Home 02</a>
+                                                         </h4>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col homemenu">
+                                                      <div class="homemenu-thumb mb-15">
+                                                         <img src="{% static 'assets/img/menu/home-3.jpg' %}" alt="">
+                                                         <div class="homemenu-btn">
+                                                            <a class="tp-menu-btn" href="index-4.html">View Demo</a>
+                                                         </div>
+                                                      </div>
+                                                      <div class="homemenu-content text-center">
+                                                         <h4 class="homemenu-title">
+                                                            <a href="index-4.html">Home 03</a>
+                                                         </h4>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                        </li>
+                                        <li class="has-dropdown"><a href="#">Pages</a>
+                                            <ul class="submenu tp-submenu">
+                                                <li><a href="about-us.html">About Us</a></li>
+                                                <li><a href="team.html">Team</a></li>
+                                                <li><a href="team-details.html">Team Details</a></li>
+                                                <li><a href="portfolio.html">Portfolio</a></li>
+                                                <li><a href="shop.html">Shop</a></li>
+                                                <li><a href="shop-details.html">Shop Details</a></li>
+                                                <li><a href="cart.html">Cart</a></li>
+                                                <li><a href="checkout.html">Checkout</a></li>
+                                                <li><a href="faq.html">Faq</a></li>
+                                                <li><a href="login.html">Login</a></li>
+                                                <li><a href="register.html">Register</a></li>
+                                                <li><a href="error.html">Error</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-dropdown"><a href="donation-details.html">Donation</a>
+                                            <ul class="submenu tp-submenu">
+                                                <li><a href="donation-1.html">Donation 01</a></li>
+                                                <li><a href="donation-2.html">Donation 02</a></li>
+                                                <li><a href="donation-sidebar.html">Donation Sidebar</a></li>
+                                                <li><a href="donation-details.html">Donation Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-dropdown"><a href="evant-details.html">Events</a>
+                                            <ul class="submenu tp-submenu">
+                                                <li><a href="event.html">Event</a></li>
+                                                <li><a href="evant-details.html">Event Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-dropdown"><a href="blog-details.html">Blog</a>
+                                            <ul class="submenu tp-submenu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="blog-sidebar.html">Blog Sidebar</a></li>
+                                                <li><a href="blog-details.html">Blog Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-4 col-lg-4 col-12">
+                                <div class="tp-header__right-action">
+                                    <ul class="d-flex align-items-center justify-content-end">
+                                        <li class="d-none d-xl-block">
+                                            <div class="tp-header__icon-box">
+                                                <button class="search-open-btn"><i class="flaticon-loupe"></i></button>
+                                                <a href="login.html"><i class="flaticon-user"></i></a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tp-header__btn d-none d-md-block">
+                                            <a class="tp-btn" href="donation-sidebar.html">Donate Now</a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tp-header-2__bar d-lg-none">
+                                                <button class="tp-menu-bar" type="button"><span><i class="fa-solid fa-bars-staggered"></i></span></button>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tp-header__tel-box d-flex align-items-center">
+                                                <div class="tp-header__tel-icon">
+                                                    <span><i class="flaticon-phone"></i></span>
+                                                </div>
+                                                <div class="tp-header__tel-text">
+                                                    <span>Call Us Anytime</span>
+                                                    <a href="tel:+986567686789">+98 656 768 6789  </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- header-area-end -->
+            </div>
+        </div>
 
-</script>
-<script>
-function toggleDatePicker(thisElement) {
-  var value = thisElement.value;
-  if (thisElement.classList.contains('datepicker-input')) {
-    thisElement.value = value.split('.').reverse().join('-')
-    thisElement.type = 'date';
-  } else if (thisElement.classList.contains('datetimepicker-input')) {
-    thisElement.value = value.split('.').reverse().join('-')
-    thisElement.type = 'datetime-local';
-  } else if (thisElement.classList.contains('timepicker-input')) {
-    thisElement.value = value.split('.').reverse().join('-')
-    thisElement.type = 'time';
-  }
+    </header>
 
-}
-</script>
+    {% block content %}
+    {% endblock %}
 
-{% block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script></script>
-{% endblock script %}
+    <footer>
+        <!-- footer-area-start -->
+        <div class="tp-footer__area">
+            <div class="tp-footer__bg" data-background="{% static 'assets/img/footer/ft-bg-1.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s"
+                        data-wow-delay=".3s">
+                            <div class="tp-footer__widget footer-col-1">
+                                <div class="tp-footer__logo">
+                                    <a href="index-2.html">
+                                        <img src="{% static 'assets/img/logo/footer-1.png' %}" alt="">
+                                    </a>
+                                </div>
+                                <div class="tp-footer__text">
+                                    <p>Suspendisse posuere egeteldapibus. <br> Aliquam cong egeteldapib Aliquam <br>
+                                        congue
+                                        posuere </p>
+                                </div>
+                                <div class="tp-footer__contact-list">
+                                    <div class="tp-footer__contact-item pb-20 d-flex about-items-center">
+                                        <div class="tp-footer__icon">
+                                            <i class="flaticon-mail"></i>
+                                        </div>
+                                        <div class="tp-footer__text">
+                                             <a href="mailto:poorexcharity@gmail.com">poorexcharity@gmail.com</a>
+                                        </div>
+                                    </div>
+                                    <div class="tp-footer__contact-item d-flex about-items-center">
+                                        <div class="tp-footer__icon">
+                                            <i aria-hidden="true" class="flaticon-phone"></i>
+                                        </div>
+                                        <div class="tp-footer__text">
+                                             <a href="tel:+990988764578">+99 (098) 876 4578</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s"
+                        data-wow-delay=".5s">
+                            <div class="tp-footer__widget footer-col-2">
+                                <h4 class="tp-footer__widget-title">Navigation</h4>
+                                <div class="tp-footer__list">
+                                    <ul>
+                                        <li><a href="#">Recent Courses</a></li>
+                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">Donation</a></li>
+                                        <li><a href="#">Latest News</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s"
+                        data-wow-delay=".7s">
+                            <div class="tp-footer__widget footer-col-3">
+                                <h4 class="tp-footer__widget-title">Campaigns</h4>
+                                <div class="tp-footer__list">
+                                    <ul>
+                                        <li><a href="#">Child Cancer</a></li>
+                                        <li><a href="#">Differently Abled</a></li>
+                                        <li><a href="#">Clean Water</a></li>
+                                        <li><a href="#">Start Fundraising</a></li>
+                                        <li><a href="#">Give Education</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 mb-45  wow tpfadeUp" data-wow-duration=".9s"
+                        data-wow-delay=".9s">
+                            <div class="tp-footer__widget footer-col-4">
+                                <h4 class="tp-footer__widget-title">Our Newsletter</h4>
+                                <div class="tp-footer__text pb-5">
+                                    <p>Subscribe to our newsletter and get update <br>in your inbox for future plan</p>
+                                </div>
+                                <div class="tp-footer__form">
+                                    <form action="#">
+                                        <input type="email" placeholder="Email Address">
+                                    </form>
+                                    <button class="tp-btn-sm theme-2-bg">Subscribe<i class="far fa-long-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-area-end -->
+
+        <!-- copyright-area-start -->
+        <div class="tp-copyright__area tp-copyright__bg">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="tp-copyright__text text-center text-sm-start">
+                            <span>© Copyright 2023 by Poorex.com</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="tp-copyright__social text-center text-sm-end">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- copyright-area-end -->
+
+    </footer>
+
+
+    <!-- JS here -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/waypoints.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/slick.js' %}"></script>
+    <script src="{% static 'assets/js/magnific-popup.js' %}"></script>
+    <script src="{% static 'assets/js/purecounter.js' %}"></script>
+    <script src="{% static 'assets/js/wow.js' %}"></script>
+    <script src="{% static 'assets/js/nice-select.js' %}"></script>
+    <script src="{% static 'assets/js/swiper-bundle.js' %}"></script>
+    <script src="{% static 'assets/js/isotope-pkgd.js' %}"></script>
+    <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
+    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
 </body>
+
+
+<!-- Mirrored from weblearnbd.net/tphtml/poorex-prev/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Jun 2023 05:36:39 GMT -->
 </html>

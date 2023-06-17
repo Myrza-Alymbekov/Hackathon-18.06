@@ -1,9 +1,0 @@
-[flake8]
-extend-ignore = E203, W503, F403, C901
-exclude =
-    .git,
-    */migrations/*,
-    venv/,
-    __pycache__,
-max-complexity = 10
-max-line-length = 120
