@@ -7,8 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.shortcuts import render
 
-
-from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
+from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, VolunteerForm
 from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer, Donation, Requisite, Volunteer
 
 from .tasks import send_message
@@ -147,17 +146,22 @@ def change_feedback_status(request, pk):
 def index(request):
     return render(request, 'index.html')
 
+
 def contact(request):
     return render(request, 'other/contact.html')
+
 
 def blog(request):
     return render(request, 'blog/blog-sidebar.html')
 
+
 def event(request):
     return render(request, 'event/event.html')
 
+
 def donation(request):
     return render(request, 'donation/donation-2.html')
+
 
 def about(request):
     return render(request, 'blog/about-us.html')
@@ -189,7 +193,6 @@ def create_requisite(request, pk):
         return redirect(reverse('feedback_detail', kwargs={'pk': pk}))
 
 
-
 class VolunteerCreateView(SuccessMessageMixin, CreateView):
     model = Volunteer
     template_name = 'feedback/feedback_create.html'
@@ -204,11 +207,10 @@ class VolunteerCreateView(SuccessMessageMixin, CreateView):
         context['comment'] = FeedbackCommentsForm
         return context
 
+
 class VolunteerListView(ListView):
     template_name = 'volunteer/team.html'
     model = Volunteer
     paginate_by = 4
     fields = '__all__'
     filtered_fields = []
-
-
