@@ -153,6 +153,9 @@ def contact(request):
 def blog(request):
     return render(request, 'blog/blog-sidebar.html')
 
+def blogDetail(request):
+    return render(request, 'blog/blog-details.html')
+
 def event(request):
     return render(request, 'event/event.html')
 
