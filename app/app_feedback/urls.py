@@ -6,6 +6,7 @@ from global_login_required import login_not_required
 from . import views
 
 urlpatterns = [
+
     path('', login_not_required(views.index), name='index'),
     path('contact/', views.contact, name='contact'),
     path('events/', login_not_required(views.FeedbackListView.as_view()), name='feedback_list'),
