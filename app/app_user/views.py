@@ -26,7 +26,7 @@ class UserLoginView(LoginView):
 class PasswordUpdateView(SuccessMessageMixin, PasswordChangeView):
     model = User
     form_class = PasswordUpdateForm
-    template_name = 'user/change_password.html'
+    template_name = 'templates_old/user/change_password.html'
     success_url = reverse_lazy('login')
     success_message = 'Вы успешно поменяли свой пароль'
 
@@ -37,7 +37,7 @@ class PasswordUpdateView(SuccessMessageMixin, PasswordChangeView):
 # Сброс пароля
 class PasswordResetAccView(SuccessMessageMixin, PasswordResetConfirmView):
     form_class = PasswordReseForm
-    template_name = 'user/password_reset_confirm.html'
+    template_name = 'templates_old/user/password_reset_confirm.html'
     success_url = reverse_lazy('login')
     success_message = 'Вы изменили свой пароль'
 
@@ -47,7 +47,7 @@ class PasswordResetAccView(SuccessMessageMixin, PasswordResetConfirmView):
 
 class PasswordEmailView(SuccessMessageMixin, PasswordResetView):
     form_class = PasswordEmailForm
-    template_name = 'user/password_reset.html'
+    template_name = 'templates_old/user/password_reset_confirm.html'
     success_url = reverse_lazy('login')
     success_message = 'Инструкция по смене пароля выслана на Вашу почту. Пожалуйста проверьте почту.' \
                       'Если ссылка со сбросом пароля не приходит на Вашу почту убедитесь, ' \
