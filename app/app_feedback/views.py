@@ -147,17 +147,33 @@ def change_feedback_status(request, pk):
 def index(request):
     return render(request, 'index.html')
 
+
 def contact(request):
-    return render(request, 'other/contact.html')
+    return render(request, 'index.html')
+
+
 
 def blog(request):
     return render(request, 'blog/blog-sidebar.html')
 
+
+def blogDetail(request):
+    return render(request, 'blog/blog-details.html')
+
+
 def event(request):
     return render(request, 'event/event.html')
 
+
 def donation(request):
-    return render(request, 'donation/donation-2.html')
+    faq_list = Donation.objects.filter(user=request.user).select_related('requisite')
+    context = {
+        'faq_list': faq_list,
+    }
+
+    return render(request, 'online-form/forms.html', context=context)
+
+
 
 def about(request):
     return render(request, 'blog/about-us.html')
@@ -189,20 +205,23 @@ def create_requisite(request, pk):
         return redirect(reverse('feedback_detail', kwargs={'pk': pk}))
 
 
-
 class VolunteerCreateView(SuccessMessageMixin, CreateView):
     model = Volunteer
-    template_name = 'feedback/feedback_create.html'
+    template_name = 'volunteer/volunteer_create.html'
     form_class = VolunteerForm
     success_message = 'Волонтер успешно добавлен'
-    success_url = ''
+    success_url = '/events'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['button_name'] = 'Создать'
-        context['form'] = FeedbackForm
-        context['comment'] = FeedbackCommentsForm
+        context['form'] = VolunteerForm
         return context
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class VolunteerListView(ListView):
     template_name = 'volunteer/team.html'
@@ -210,5 +229,3 @@ class VolunteerListView(ListView):
     paginate_by = 4
     fields = '__all__'
     filtered_fields = []
-
-

@@ -1,7 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from app_user.models import User
+from django.utils import timezone
 
+from app_user.models import User
 
 CHOICES_STATUS = (
     ('done', 'Завершено'),
@@ -28,7 +29,8 @@ class Feedback(models.Model):
     date_of_issue = models.DateField(auto_now_add=True, verbose_name='Дата поступления заявки')
     expiration_date = models.DateField(verbose_name='Дата окончания', null=True, blank=True)
     phone_number = models.CharField(max_length=15, verbose_name="Номер телефона")
-    reserve_phone_number = models.CharField(max_length=15, verbose_name="Дополнительный номер телефона", null=True, blank=True)
+    reserve_phone_number = models.CharField(max_length=15, verbose_name="Дополнительный номер телефона", null=True,
+                                            blank=True)
     address = models.CharField(max_length=50, verbose_name="Адрес")
     cash_need = models.FloatField(verbose_name='Необходимая сумма', null=True, blank=True)
 
@@ -79,9 +81,11 @@ class FeedbackComments(models.Model):
 
 def user_directory_path(instance, filename):
     return f'images/avatar/volunteers/{instance.id}/{filename}'
+
+
 class Volunteer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    volunteer_name = models.CharField(max_length=55, verbose_name="Имя волонтера")
+    volunteer_name = models.CharField(max_length=55, verbose_name="Имя")
     type_of_help = models.TextField(verbose_name="Чем может помочь")
     phone_number = models.CharField(max_length=15, verbose_name="Номер телефона")
     avatar = models.ImageField(null=True, blank=True, upload_to=user_directory_path,
@@ -94,7 +98,6 @@ class Volunteer(models.Model):
 
     def __str__(self):
         return self.volunteer_name
-
 
 
 class Requisite(models.Model):
@@ -113,6 +116,7 @@ class Donation(models.Model):
     requisite = models.ForeignKey(Requisite, on_delete=models.CASCADE, verbose_name='Донат')
     sum_of_donation = models.FloatField(verbose_name='Сумма доната')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    date = models.DateField(default=timezone.now, verbose_name='Дата доната')
 
     class Meta:
         verbose_name = 'Донат'
@@ -132,4 +136,3 @@ class QuestionAnswer(models.Model):
 
     def __str__(self):
         return str(self.question)
-

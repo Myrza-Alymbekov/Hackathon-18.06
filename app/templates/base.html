@@ -65,7 +65,7 @@
                 <div class="search__wrapper">
                     <div class="search__top d-flex justify-content-between align-items-center">
                     <div class="search__logo">
-                        <a href="index-2.html">
+                        <a href="{% url 'index' %}">
                             <img src="{% static 'assets/img/logo/footer-1.png' %}" alt="">
                         </a>
                     </div>
@@ -106,7 +106,7 @@
           <button class="close-btn"><i class="fal fa-times"></i></button>
        </div>
        <div class="tpoffcanvas__logo">
-          <a href="index-2.html">
+          <a href="{% url 'index' %}">
              <img src="{% static 'assets/img/logo/footer-1.png' %}" alt="">
           </a>
        </div>
@@ -162,9 +162,9 @@
 
     <header class="tp-header-height">
         <div id="header-sticky" class="tp-header__left-wrap p-relative">
-
-            <div class="tp-header__logo">
-                <a href="#"><img src="{% static 'assets/img/logo/logoo.png' %}" alt="" width="120px" height="120px"></a>
+      
+            <div class="tp-header__logo" style="background:#1e3737;">
+                <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logoo.png' %}" alt="" width="120px" height="120px"></a>
 
             </div>
             <div class="tp-header__right-wrap tp-header__plr">
@@ -209,16 +209,30 @@
                                 <nav class="tp-main-menu-content">
                                     <ul>
 
-                                        <li><a href="/index">Главная</a></li>
+                                        <li><a href="{% url 'index' %}">Главная</a></li>
+                                        {% if request.user.is_authenticated %}
                                         <li><a href="/donation">Мои Донаты</a></li>
-                                        <li class="has-dropdown"><a href="blog-details.html">О Нас</a>
+                                        {% else %}
+
+                                        {% endif %}
+                                        <li class="has-dropdown"><button disabled>О Нас</button>
                                             <ul class="submenu tp-submenu">
-                                                <li><a href="blog.html">Вопросы</a></li>
+                                                <li><a href="{% url 'question_answer' %}">Вопросы</a></li>
                                                 <li><a href="/about">Об Организации</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/contact">Контакты</a></li>
-                                        <li><a href="contact.html">Заявка </a></li>
+
+                                        <li class="has-dropdown"><button>Заявка</button>
+                                            <ul class="submenu tp-submenu">
+                                                {% if request.user.is_authenticated %}
+                                                <li><a href="{% url 'feedback_create' %}">Подать заявку</a></li>
+                                                <li><a href="{% url 'volunteer_create' %}">Стать волонтером</a></li>
+                                                {% else %}
+                                                <li><a href="{% url 'login' %}">Подать заявку</a></li>
+                                                <li><a href="{% url 'login' %}">Стать волонтером</a></li>
+                                            </ul>
+                                            {% endif %}
+                                        </li>
 
                                     </ul>
                                 </nav>
@@ -229,13 +243,16 @@
                                     <ul class="d-flex align-items-center justify-content-end">
                                         <li class="d-none d-xl-block">
                                             <div class="tp-header__icon-box">
-                                                <button class="search-open-btn"><i class="flaticon-loupe"></i></button>
-                                                {% comment %} <a href="login.html"><i class="flaticon-user"></i></a> {% endcomment %}
+                                                {% if request.user.is_authenticated %}
+                                                <a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i></a>
+                                                {% else %}
+                                                <a href="{% url 'login' %}"><i class="flaticon-user"></i></a>
+                                                {% endif %}
                                             </div>
                                         </li>
                                         <li>
                                             <div class="tp-header__btn d-none d-md-block">
-                                            <a class="tp-btn" href="donation-sidebar.html">Пожертвовать сейчас</a>
+                                            <a class="tp-btn" href="/events">Пожертвовать сейчас</a>
 
                                             </div>
                                         </li>
@@ -279,7 +296,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-6 mb-45 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
                             <div class="tp-footer__widget footer-col-1">
                                 <div class="tp-footer__logo">
-                                    <a href="/index" style="position:relative;">
+                                    <a href="{% url 'index' %}" style="position:relative;">
                                         <img src="{% static 'assets/img/logo/logoo.png' %}" alt="" width="50">
                                         <p style="color:white; font-size:1.2rem; position:absolute;top:6;left:60; white-space: nowrap;">Heart in everything</p>
                                     </a>

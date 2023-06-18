@@ -58,7 +58,7 @@
             <div class="tp-slider-subtitle__title">
                 <div class="tp-slider-subtitle__first__animated">
                     <span class="tp-slider-subtitle__first">Мы здесь, чтобы поддержать вас на каждом этапе</span>
-                    <h4 class="tp-slider-title__second pb-30">Предоставление <br>Помощи тем <br> Кто в этом нуждается</h4>
+                    <h4 class="tp-slider-title__second pb-30">Предоставление <br>помощи тем, <br> кто в этом нуждается</h4>
                 </div>
                 <a class="tp-btn theme-2-bg tp-btn__animated" href="#">Открой для себя больше</a>
             </div>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="tp-feature__item z-index">
                                 <div class="tp-feature__content d-flex align-items-center justify-content-between">
-                                    <h4 class="tp-feature__title-sm">Медицинский & <br> Уход</h4>
+                                    <h4 class="tp-feature__title-sm">Медицинский<br> Уход</h4>
                                     <div class="tp-feature__icon">
                                         <span style="position:relative;">
                                             <i class="flaticon-stethoscope" style="position:absolute; top:18;left:18;"></i>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="tp-feature__item z-index">
                                 <div class="tp-feature__content d-flex align-items-center justify-content-between">
-                                    <h4 class="tp-feature__title-sm">Приведи людей & <br>Вместе</h4>
+                                    <h4 class="tp-feature__title-sm">Приведи людей вместе с собой</h4>
                                     <div class="tp-feature__icon">
                                         <span style="position:relative;">
                                             <i class="flaticon-handshake" style="position:absolute; top:18;left:18;"></i>
@@ -139,7 +139,7 @@
                                     </div>
                                 </div>
                                 <div class="tp-feature__text">
-                                    <p>Благотворительность – это акт проявления любви и доброты к другим</p>
+                                    <p>Благотворительность – это акт проявления любви и доброты к другим. Стань частью большого сообщества небезразличных людей</p>
                                 </div>
                             </div>
                         </div>
@@ -206,14 +206,14 @@
                             </div>
                             <div class="tp-about__bottom d-flex">
                                 <div class="tp-about__btn">
-                                    <a class="tp-btn" href="about-us.html">Открой для себя больше</a>
+                                    <a class="tp-btn" href="{% url 'feedback_list' %}">Открой для себя больше</a>
                                 </div>
                                 <div class="tp-about__author-box d-flex align-items-center">
                                     <div class="tp-about__author-thumb pr-25">
                                         <img src="{% static 'assets/img/about/author-1.png' %}" alt="">
                                     </div>
                                     <div class="tp-about__author-info">
-                                        <h5 class="tp-about__author-name">Шарлотта Ава</h5>
+                                        <h5 class="tp-about__author-name">Мырза Алымбеков</h5>
                                         <span>Клиент</span>
                                     </div>
                                 </div>
@@ -334,7 +334,9 @@
                                 <p>Благотворительность - это акт добра, безусловного и бескорыстного, который является
                                     осознанным актом, но решение принимается сердцем, не ожидая награды и без обязательств.</p>
                             </div>
-                            <a class="tp-btn" href="team-details.html">Все отзывы</a>
+
+                            <a class="tp-btn" href="{% url 'question_answer' %}">Все отзывы</a>
+
                         </div>
                     </div>
                     <div class="col-xl-7 col-lg-6 col-md-6">
@@ -484,11 +486,11 @@
                     <div class="col-xl-12">
                         <div class="tp-cta-2__content text-center">
                             <span class="tp-cta-2__subtitle  wow tpfadeUp" data-wow-duration=".9s"
-                            data-wow-delay=".3s">давайте начнем что-то для них</span>
+                            data-wow-delay=".3s">давайте начнем действовать</span>
                             <h4 class="tp-cta-2__title wow tpfadeUp" data-wow-duration=".9s"
-                            data-wow-delay=".5s">Никто никогда не стал бедным, <br>отдавая</h4>
-                            <a href="donation-sidebar.html" class="tp-btn theme-2-bg  wow tpfadeUp" data-wow-duration=".9s"
-                            data-wow-delay=".7s">Начать пожертвование сейчас</a>
+                            data-wow-delay=".5s">Все в наших<br>руках</h4>
+                            <a href="{% url 'volunteer_create' %}" class="tp-btn theme-2-bg  wow tpfadeUp" data-wow-duration=".9s"
+                            data-wow-delay=".7s">Стать волонтером</a>
                         </div>
                     </div>
                 </div>
@@ -500,7 +502,7 @@
 
     <div class="tp-providing__area tp-providing__space p-relative">
         <div class="tp-providing__bg wow tpfadeLeft" data-wow-duration=".9s"
-        data-wow-delay=".3s" data-background="{% static 'assets/img/providing/provide-bg-1.png' %}">
+        data-wow-delay=".3s" data-background="{% static 'assets/img/providing/yannis-h-uaPaEM7MiQQ-unsplash.jpg'%}" width="500">
             <div class="tp-providing__bg-text-box d-none d-xl-block">
                 <div class="tp-providing__bg-text d-flex align-items-center">
                     <span><i class="flaticon-handshake-1"></i></span>
@@ -611,47 +613,47 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
                     <div class="tp-blog__item">
-                        <img src="{% static 'assets/img/blog/blog-1.png' %}" alt="">
+                        <img src="{% static 'assets/img/gallery/siora-photography-ZslFOaqzERU-unsplash.jpg' %}" alt="" height="400">
                         <div class="tp-blog__img-text">
-                            <a href="blog-details.html"><span><i class="flaticon-tag"></i>ПРИЮТ</span></a>
+                            <a href="/blog-detail"><span><i class="flaticon-tag"></i>КУЛЬТУРА</span></a>
                         </div>
                         <div class="tp-blog__content">
-                            <a href="blog-details.html">
+                            <a href="/blog-detail">
                                 <h4 class="tp-blog__title-sm">Почему важно их поддерживать</h4>
                             </a>
-                            <span>24 октября 2022 г.</span>
+                            <span>24 мар 2023 г.</span>
                             <div class="tp-blog__link">
-                                <a href="blog-details.html">Читать далее<i class="far fa-long-arrow-right"></i></a>
+                                <a href="/blog-detail">Читать далее<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
                     <div class="tp-blog__item">
-                        <img src="{% static 'assets/img/blog/blog-2.png' %}" alt="">
+                        <img src="{% static 'assets/img/blog/ryan-sepulveda-8NymO2MErVI-unsplash.jpg' %}" alt="" height="400">
                         <div class="tp-blog__img-text">
-                            <a href="blog-details.html"><span><i class="flaticon-tag"></i>ПИЩА</span></a>
+                            <a href="/blog-detail"><span><i class="flaticon-tag"></i>СТРОИТЕЛЬСТВО</span></a>
                         </div>
                         <div class="tp-blog__content">
-                            <a href="blog-details.html"><h4 class="tp-blog__title-sm">Пожертвуйте деньги для бедных детей Африки</h4></a>
-                            <span>24 октября 2022 г.</span>
+                            <a href="/blog-detail"><h4 class="tp-blog__title-sm">Сбор для постройки площадки</h4></a>
+                            <span>18 апрель 2023 г.</span>
                             <div class="tp-blog__link">
-                                <a href="blog-details.html">Читать далее<i class="far fa-long-arrow-right"></i></a>
+                                <a href="/blog-detail">Читать далее<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
                     <div class="tp-blog__item">
-                        <img src="{% static 'assets/img/blog/blog-3.png' %}" alt="">
+                        <img src="{% static 'assets/img/gallery/andrew-neel-ute2XAFQU2I-unsplash.jpg' %}" alt="" height="400">
                         <div class="tp-blog__img-text">
-                            <a href="blog-details.html"><span><i class="flaticon-tag"></i>ЗДОРОВЬЕ</span></a>
+                            <a href="/blog-detail"><span><i class="flaticon-tag"></i>ОБРАЗОВАНИЕ</span></a>
                         </div>
                         <div class="tp-blog__content">
-                            <a href="blog-details.html"><h4 class="tp-blog__title-sm">Школьное консультирование для детей</h4></a>
-                            <span>24 октября 2022 г.</span>
+                            <a href="/blog-detail"><h4 class="tp-blog__title-sm">Школьное консультирование для детей</h4></a>
+                            <span>10 февраль 2023 г.</span>
                             <div class="tp-blog__link">
-                                <a href="blog-details.html">Читать далее<i class="far fa-long-arrow-right"></i></a>
+                                <a href="/blog-detail">Читать далее<i class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
