@@ -8,7 +8,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.shortcuts import render
 
 
-from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm
+from .forms import FeedbackForm, FeedbackCommentsForm, ChangeStatusForm, VolunteerForm
 from .models import Feedback, FeedbackFiles, FeedbackComments, QuestionAnswer, Donation, Requisite, Volunteer
 
 from .tasks import send_message
