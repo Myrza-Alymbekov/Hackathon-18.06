@@ -148,7 +148,7 @@ def index(request):
 
 
 def contact(request):
-    return render(request, 'other/contact.html')
+    return render(request, 'index.html')
 
 
 def blog(request):
@@ -164,7 +164,12 @@ def event(request):
 
 
 def donation(request):
-    return render(request, 'donation/donation-2.html')
+    faq_list = Donation.objects.filter(user=request.user).select_related('requisite')
+    context = {
+        'faq_list': faq_list,
+    }
+
+    return render(request, 'online-form/forms.html', context=context)
 
 
 def about(request):

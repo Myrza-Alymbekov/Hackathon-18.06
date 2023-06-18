@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
+
 from app_user.models import User
 
 
@@ -96,7 +98,6 @@ class Volunteer(models.Model):
         return self.volunteer_name
 
 
-
 class Requisite(models.Model):
     feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE, verbose_name='Реквизит')
     account_number = models.CharField(max_length=16, verbose_name='Номер счета')
@@ -113,6 +114,7 @@ class Donation(models.Model):
     requisite = models.ForeignKey(Requisite, on_delete=models.CASCADE, verbose_name='Донат')
     sum_of_donation = models.FloatField(verbose_name='Сумма доната')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    date = models.DateField(default=timezone.now, verbose_name='Дата доната')
 
     class Meta:
         verbose_name = 'Донат'

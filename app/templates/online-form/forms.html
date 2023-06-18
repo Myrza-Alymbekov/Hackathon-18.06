@@ -16,17 +16,46 @@
                     <div class="col-12">
                         <div class="tp-breadcrumb__content z-index-5">
                             <div class="tp-breadcrumb__list">
-                               <span><a href="index-2.html">home</a></span>
+                               <span><a href="index-2.html">Главная</a></span>
                                <span class="dvdr"><i class="fa-sharp fa-solid fa-slash-forward"></i></span>
-                               <span>Faqs</span>
+                               <span>Мои донаты</span>
                             </div>
-                            <h3 class="tp-breadcrumb__title">Our Faqs</h3>
+                            <h3 class="tp-breadcrumb__title">Мои донаты</h3>
                          </div>
                     </div>
                 </div>
             </div>
         </div>
-
+<section class="cart-area pt-120 pb-120">
+        <div class="container">
+           <div class="row">
+              <div class="col-12">
+                 <form action="#">
+                    <div class="table-content table-responsive">
+                       <table class="table">
+                          <thead>
+                             <tr>
+                                <th class="product-quantity">Дата</th>
+                                <th class="product-subtotal">Реквизит</th>
+                                <th class="product-remove">Сумма</th>
+                             </tr>
+                          </thead>
+                          <tbody>
+                          {% for i in faq_list %}
+                             <tr>
+                                <td class="product-thumbnail">{{ i.date }}</td>
+                                <td class="product-name">{{ i.requisite.account_number }}</td>
+                                <td class="product-price"><span class="amount">{{ sum_of_donation }}</span></td>
+                             </tr>
+                          {% endfor %}
+                          </tbody>
+                       </table>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </section>
     <div>
         <div class="container">
         <form accept-charset="UTF-8" enctype="multipart/form-data" action="" method="POST">
