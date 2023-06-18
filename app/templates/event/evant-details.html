@@ -55,7 +55,6 @@
                                 </div>
 
                             <div class="postbox__comment-form-box">
-                                {% if request.user.is_authenticated %}
                             <h3 class="postbox__comment-form-title">Добавить описание</h3>
                             <div class="postbox__comment-form">
                                  <form id="contact-form" method="POST" action="{% url 'add_comment' feedback.id %}">
@@ -91,7 +90,6 @@
                                             <button type="submit" class="tp-btn">Отправить</button>
                                         </div>
                                 </form>
-                                {% else %}
 
 
                             </div>
@@ -171,8 +169,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {% endif %}
-                            {% if request.user.is_authenticated %}
                                 <div class="tp-donation-details__form-box">
                                 <h4 class="tp-donation-details__form-title pb-45">Оказать помощь</h4>
                                 <form method="post" action="{% url 'create_donation' feedback.id %}">
@@ -201,8 +197,6 @@
 
                                 </form>
                             </div>
-                            {% else %}
-                            {% endif %}
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4">
