@@ -24,7 +24,8 @@ urlpatterns = [
     path('<int:pk>/add_comment/', views.add_comment_to_feedback, name='add_comment'),
     path('<int:pk>/delete_comment/', views.delete_comment, name='delete_comment'),
     path('<int:pk>/change_status/', views.change_feedback_status, name='change_status'),
-    # path('<int:pk>/set_employee/', views.set_employee_feedback, name='set_employee'),
+    path('<int:pk>/create_donation/', views.donation_create, name='create_donation'),
+    path('<int:pk>/create_requisite/', views.create_requisite, name='create_requisite'),
 
     path('faq/', views.faq_listview, name='question_answer'),
 

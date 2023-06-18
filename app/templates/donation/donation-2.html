@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="tp-donate-2-progress">
                                         <div class="tp-donate-2-progress-item fix">
-                                            <span class="progress-count">42%</span>
+                                            <span class="progress-count">{{ donate.percents }}%</span>
                                             <div class="progress">
                                                 <div class="progress-bar wow slideInLeft" data-wow-duration="1s"
                                                     data-wow-delay=".3s" role="progressbar" data-width="42%"
@@ -70,7 +70,7 @@
                                                 </div>
                                             </div>
                                             <div class="progress-goals">
-                                                <span>Собрано <b> {{ donate.status }}</b></span>
+                                                <span>Собрано <b> {{ donate.donates }}</b></span>
                                                 <span>Цель <b> {{ donate.cash_need }}</b></span>
                                             </div>
                                         </div>
