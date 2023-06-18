@@ -206,7 +206,7 @@
                             </div>
                             <div class="tp-about__bottom d-flex">
                                 <div class="tp-about__btn">
-                                    <a class="tp-btn" href="about-us.html">Открой для себя больше</a>
+                                    <a class="tp-btn" href="{% url 'feedback_list' %}">Открой для себя больше</a>
                                 </div>
                                 <div class="tp-about__author-box d-flex align-items-center">
                                     <div class="tp-about__author-thumb pr-25">
@@ -334,7 +334,7 @@
                                 <p>Благотворительность - это акт добра, безусловного и бескорыстного, который является
                                     осознанным актом, но решение принимается сердцем, не ожидая награды и без обязательств.</p>
                             </div>
-                            <a class="tp-btn" href="team-details.html">Все отзывы</a>
+                            <a class="tp-btn" href="{% url 'question_answer' %}">Все отзывы</a>
                         </div>
                     </div>
                     <div class="col-xl-7 col-lg-6 col-md-6">
@@ -484,11 +484,11 @@
                     <div class="col-xl-12">
                         <div class="tp-cta-2__content text-center">
                             <span class="tp-cta-2__subtitle  wow tpfadeUp" data-wow-duration=".9s"
-                            data-wow-delay=".3s">давайте начнем что-то для них</span>
+                            data-wow-delay=".3s">давайте начнем действовать</span>
                             <h4 class="tp-cta-2__title wow tpfadeUp" data-wow-duration=".9s"
                             data-wow-delay=".5s">Все в наших<br>руках</h4>
-                            <a href="donation-sidebar.html" class="tp-btn theme-2-bg  wow tpfadeUp" data-wow-duration=".9s"
-                            data-wow-delay=".7s">Начать пожертвование сейчас</a>
+                            <a href="{% url 'volunteer_create' %}" class="tp-btn theme-2-bg  wow tpfadeUp" data-wow-duration=".9s"
+                            data-wow-delay=".7s">Стать волонтером</a>
                         </div>
                     </div>
                 </div>
